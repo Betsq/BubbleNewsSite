@@ -1,0 +1,27 @@
+﻿@model BubbleNewsSite.Models.News
+
+@{ 
+    ViewBag.Title = "Add news";
+}
+
+<form asp-action="Create" asp-controller="News">
+    <div class="form-group">
+        <label asp-for="Article"></label>
+        <input type="text" asp-for="Article" class="form-control">
+    </div>
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <input type="text" asp-for="Description" class="form-control">
+    </div>
+    <div class="form-group">
+        <label asp-for="NewsType"></label>
+        <input type="text" asp-for="NewsType" class="form-control">
+    </div>
+    <div class="form-group">
+        <label asp-for="Img"></label>
+        <input type="text" asp-for="Img" class="form-control">
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Send" class="btn btn-default"/>
+    </div>
+</form>
