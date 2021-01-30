@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,6 +9,7 @@ namespace BubbleNewsSite.Models
     public class News
     {
         public int Id { get; set; }
+
         [Display(Name = "Article")]
         public string Article { get; set; }
         [Display(Name = "Desription")]
@@ -16,6 +17,9 @@ namespace BubbleNewsSite.Models
         [Display(Name = "NewsType")]
         public string NewsType { get; set; }
         [Display(Name = "Img")]
+        public string Article { get; set; }
+        public string Description { get; set; }
+        public string NewsType { get; set; }
         public string Img { get; set; } //Temporarily by reference  
     }
 }
