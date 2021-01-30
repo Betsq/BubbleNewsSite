@@ -1,0 +1,20 @@
+﻿@model BubbleNewsSite.Models.News
+
+@{
+    ViewBag.Title = "Details";
+}
+<div>
+    <dl class="dl-horizontal">
+        <dt>Article news</dt>
+        <dd>@Model.Article</dd>
+
+        <dt>Description</dt>
+        <dd>@Model.Description</dd>
+
+        <dt>News type</dt>
+        <dd>@Model.NewsType</dd>
+
+        <dt>Image</dt>
+        <dd>@Model.Img</dd>
+    </dl>
+</div>

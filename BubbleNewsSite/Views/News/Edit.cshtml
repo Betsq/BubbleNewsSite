@@ -1,12 +1,12 @@
 ﻿@model BubbleNewsSite.Models.News
 
 @{
-    ViewBag.Title = "News";
+    ViewBag.Title = "Edit";
 }
 
-<form asp-action="Create" asp-controller="News">
+<form asp-action="Edit" asp-controller="News">
     <div class="form-group">
-        <label asp-for="Article"></label>
+        <label asp-for="Article" class="control-label"></label>
         <input type="text" asp-for="Article" class="form-control">
     </div>
     <div class="form-group">

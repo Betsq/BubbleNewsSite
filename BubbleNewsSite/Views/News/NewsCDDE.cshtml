@@ -1,0 +1,18 @@
+﻿@model IEnumerable<BubbleNewsSite.Models.News>
+
+<a asp-action="Create">Add news</a>
+<table class="table">
+    <tr><td>Article</td><td>News type</td></tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Article</td>
+            <td>@item.NewsType</td>
+            <td>
+                <a class="text-decoration-none text-dark" asp-action="Details" asp-controller="News" asp-route-id="@item.Id">Details</a> |
+                <a class="text-decoration-none text-dark" asp-action="Edit" asp-controller="News" asp-route-id="@item.Id">Edit</a> |
+                <a class="text-decoration-none text-dark" asp-action="Delete" asp-controller="News" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+    }
+</table>
