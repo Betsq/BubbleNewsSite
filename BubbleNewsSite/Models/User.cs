@@ -9,6 +9,6 @@ namespace BubbleNewsSite.Models
 {
     public class User : IdentityUser
     {
-        public string Username { get; set; }
+        public string Name { get; set; }
     }
 }

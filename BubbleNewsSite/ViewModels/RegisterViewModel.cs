@@ -10,7 +10,7 @@ namespace BubbleNewsSite.ViewModels
     {
         [Required]
         [Display(Name = "Username")]
-        public string Username { get; set; }
+        public string Name { get; set; }
 
         [Required]
         [Display(Name = "Email")]

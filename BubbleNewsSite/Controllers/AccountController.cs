@@ -27,7 +27,7 @@ namespace BubbleNewsSite.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User { UserName = model.Username, Email = model.Email };
+                User user = new User { Name = model.Name, UserName = model.Email, Email = model.Email };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

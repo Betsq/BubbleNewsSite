@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BubbleNewsSite.Models
 {
-    public class NewsContext : DbContext
+    public class NewsContext : IdentityDbContext<User>
     {
         public DbSet<News> News { get; set; }
         public NewsContext(DbContextOptions<NewsContext> options)
