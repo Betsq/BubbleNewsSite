@@ -30,6 +30,19 @@
                     </ul>
                 </div>
             </div>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <p>@User.Identity.Name</p>
+
+                <form method="post" asp-controller="Account" asp-action="Logout">
+                    <input type="submit" value="Выход" />
+                </form>
+            }
+            else
+            {
+                <a asp-controller="Account" asp-action="Login" class="m-1">Вход</a>
+                <a asp-controller="Account" asp-action="Register" class="m-1">Регистрация</a>
+            }
         </nav>
     </header>
     <div class="container">
