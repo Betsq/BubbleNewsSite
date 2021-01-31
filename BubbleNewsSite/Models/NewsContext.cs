@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,6 @@ namespace BubbleNewsSite.Models
     public class NewsContext : DbContext
     {
         public DbSet<News> News { get; set; }
-
         public NewsContext(DbContextOptions<NewsContext> options)
             :base(options)
         {
