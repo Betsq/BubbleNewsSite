@@ -101,6 +101,7 @@ namespace BubbleNewsSite.Controllers
         #endregion
 
         #region ChangePassword
+        [HttpGet]
         public async Task<IActionResult> ChangePassword(string id)
         {
             User user = await _userManager.FindByIdAsync(id);
