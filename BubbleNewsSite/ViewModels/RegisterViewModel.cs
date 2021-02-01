@@ -19,6 +19,7 @@ namespace BubbleNewsSite.ViewModels
 
         [Required]
         [DataType(DataType.Password)]
+        [StringLength(100, ErrorMessage = "Field {0} must have at least {2} and maximum {1} characters.", MinimumLength = 5)]
         [Display(Name = "Password")]
         public string Password { get; set; }
 

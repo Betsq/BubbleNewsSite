@@ -4,9 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using BubbleNewsSite.Models;
 using BubbleNewsSite.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BubbleNewsSite.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class UsersController : Controller
     {
         UserManager<User> _userManager;
