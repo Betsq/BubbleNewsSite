@@ -17,7 +17,7 @@ namespace BubbleNewsSite.Controllers
         }
         public IActionResult News()
         {
-            return View();
+            return View(db.News.ToList());
         }
 
         public async Task<IActionResult> NewsCDDE()

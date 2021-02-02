@@ -1,7 +1,10 @@
-﻿@model BubbleNewsSite.Models.News
+﻿@model IEnumerable<BubbleNewsSite.Models.News>
 
 @{
     ViewBag.Title = "News";
 }
 
-Hello!
+@foreach (var n in Model)
+{
+@Html.Raw(n.Description);
+}
