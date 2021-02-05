@@ -27,6 +27,7 @@ namespace BubbleNewsSite.Models
                 if (result.Succeeded)
                 {
                     await userManager.AddToRoleAsync(admin, "admin");
+
                 }
             }
         }
