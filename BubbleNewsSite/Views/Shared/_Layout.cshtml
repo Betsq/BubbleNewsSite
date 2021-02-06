@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<User> userManager
+@{
+    var user = userManager.GetUserId(User);    
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -45,7 +50,7 @@
             @if (User.Identity.IsAuthenticated)
             {
                 <p>@User.Identity.Name</p>
-                <a class="nav-link text-dark" asp-controller="Account" asp-action="MyPersonalCabinet">My Cabinet</a>
+                <a class="nav-link text-dark" asp-controller="Account" asp-action="MyPersonalCabinet" asp-route-id="@user">My Cabinet</a>
 
                 <form method="post" asp-controller="Account" asp-action="Logout">
                     <input type="submit" value="Выход" />
@@ -70,7 +75,6 @@
             <a class="nav-link text-dark" asp-controller="News" asp-action="news" asp-route-typeNews="ComputerHardware">Computer Hardware</a>
         </div>
     </div>
-
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()

@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 
+
 namespace BubbleNewsSite.Controllers
 {
     public class AccountController : Controller
@@ -215,6 +216,7 @@ namespace BubbleNewsSite.Controllers
 
             var user = await _userManager.FindByIdAsync(id);
             var userId = _userManager.GetUserId(HttpContext.User);
+            
             if (user != null && userId == id)
             {
                 return View(user);
