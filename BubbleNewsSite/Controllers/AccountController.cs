@@ -210,9 +210,16 @@ namespace BubbleNewsSite.Controllers
         #region MyPersonalCabinet 
 
         [Authorize]
-        public IActionResult MyPersonalCabinet()
+        public async Task<IActionResult> MyPersonalCabinet(string id)
         {
-            return View();
+
+            var user = await _userManager.FindByIdAsync(id);
+            var userId = _userManager.GetUserId(HttpContext.User);
+            if (user != null && userId == id)
+            {
+                return View(user);
+            }
+            return NotFound();
         }        
         #endregion
     }
