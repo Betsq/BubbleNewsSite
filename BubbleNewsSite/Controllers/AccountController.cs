@@ -18,8 +18,7 @@ namespace BubbleNewsSite.Controllers
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
        
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager,
-            ILogger<AccountController> logger)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;

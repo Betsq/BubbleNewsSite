@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace BubbleNewsSite.Controllers
 {
-    [Authorize(Roles = "admin")]
+    //[Authorize(Roles = "admin")]
     public class UsersController : Controller
     {
         UserManager<User> _userManager;

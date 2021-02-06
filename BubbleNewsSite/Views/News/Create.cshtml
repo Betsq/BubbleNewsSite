@@ -11,12 +11,12 @@
     </div>
     <div class="form-group">
         <label asp-for="Description"></label>
-        <textarea asp-for="Description" id="mytextarea">Pisya</textarea>
+        <textarea asp-for="Description" id="mytextarea"></textarea>
         
     </div>
     <div class="form-group">
         <label asp-for="NewsType"></label>
-        <input type="text" asp-for="NewsType" class="form-control">
+        <select asp-for="NewsType" asp-items="BubbleNewsSite.Util.SelectListItemHelper.GetNewsType()" class="form-control"></select>
     </div>
     <div class="form-group">
         <label asp-for="Img"></label>

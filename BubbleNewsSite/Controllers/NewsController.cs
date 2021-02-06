@@ -48,7 +48,7 @@ namespace BubbleNewsSite.Controllers
             {
                 News news = await db.News.FirstOrDefaultAsync(n => n.Id == id);
                 if (news != null)
-                    return View(); 
+                    return View(news); 
             }
             return NotFound();
         }
