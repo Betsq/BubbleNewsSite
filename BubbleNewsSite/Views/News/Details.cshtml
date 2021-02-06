@@ -16,5 +16,15 @@
 
         <dt>Image</dt>
         <dd>@Model.Img</dd>
+
+        <dt>Is the news hidden?</dt>
+        @if (Model.HideNews == true)
+        {
+            <dd>Yes</dd>
+        }
+        else
+        {
+            <dd>No</dd>
+        }
     </dl>
 </div>

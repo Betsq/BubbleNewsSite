@@ -15,12 +15,19 @@ namespace BubbleNewsSite.Controllers
         {
             db = newsContext;
         }
-        public IActionResult News()
+        public async Task<IActionResult> news(string typeNews)
         {
-            return View(db.News.ToList());
+            var nw = from n in db.News select n;
+            if (typeNews != null)
+            {
+                nw = nw.Where(ne => ne.NewsType.Contains(typeNews) && ne.HideNews != true);
+                return View(await nw.ToListAsync());
+            }
+
+            return View(await db.News.Where(ne => ne.HideNews != true).ToListAsync());
         }
 
-        public async Task<IActionResult> NewsCDDE()
+        public async Task<IActionResult> NewsCRUD()
         {
             return View(await db.News.ToListAsync());
         }

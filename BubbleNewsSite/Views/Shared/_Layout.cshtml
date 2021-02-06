@@ -28,10 +28,10 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="News" asp-action="News">News</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="News" asp-action="news">News</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="News" asp-action="NewsCDDE">Create</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="News" asp-action="NewsCRUD">Create</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Users Controll</a>
@@ -57,6 +57,19 @@
             }
         </nav>
     </header>
+
+    <div class="container" style="background-color: aqua;">
+        <div class="list-group list-group-horizontal justify-content-center">
+            <a class="nav-link text-dark" asp-area="" asp-controller="News" asp-action="news" asp-route-typeNews="Phone">Phone</a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="News" asp-action="news" asp-route-typeNews="PC">PC</a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="News" asp-action="news" asp-route-typeNews="Laptop">Laptop</a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="News" asp-action="news" asp-route-typeNews="ITCompany">IT Company</a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="News" asp-action="news" asp-route-typeNews="Messenger">Messenger</a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="News" asp-action="news" asp-route-typeNews="SocialNetwork">Social Network</a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="News" asp-action="news" asp-route-typeNews="ComputerHardware">Computer Hardware</a>
+        </div>
+    </div>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -71,7 +84,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -12,7 +12,7 @@
     <div class="form-group">
         <label asp-for="Description"></label>
         <textarea asp-for="Description" id="mytextarea"></textarea>
-        
+
     </div>
     <div class="form-group">
         <label asp-for="NewsType"></label>
@@ -23,6 +23,10 @@
         <input type="text" asp-for="Img" class="form-control">
     </div>
     <div class="form-group">
-        <input type="submit" value="Send" class="btn btn-primary"/>
+        <label asp-for="HideNews"></label>
+        <input type="checkbox" asp-for="HideNews" class="form-control">
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Send" class="btn btn-primary" />
     </div>
 </form>

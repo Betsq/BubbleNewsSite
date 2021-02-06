@@ -21,5 +21,7 @@ namespace BubbleNewsSite.Models
         public string NewsType { get; set; }
         [Display(Name = "Img")]
         public string Img { get; set; } //Temporarily by reference  
+        [Display(Name = "Hide news?")]
+        public bool HideNews { get; set; }
     }
 }
