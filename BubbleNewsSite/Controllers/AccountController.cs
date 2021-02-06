@@ -206,5 +206,14 @@ namespace BubbleNewsSite.Controllers
             return View(model);
         }
         #endregion
+
+        #region MyPersonalCabinet 
+
+        [Authorize]
+        public IActionResult MyPersonalCabinet()
+        {
+            return View();
+        }        
+        #endregion
     }
 }
