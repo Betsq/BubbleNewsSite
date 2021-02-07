@@ -33,7 +33,8 @@ namespace BubbleNewsSite.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User() { Name = model.Name, UserName = model.Email, Email = model.Email };
+                User user = new User() { Name = model.Name, FirstName = model.FirstName, LastName = model.LastName,
+                    Gender = model.Gender, UserName = model.Email, Email = model.Email};
                 if (model.Avatar != null)
                 {
                     byte[] imageData = null;
@@ -73,7 +74,8 @@ namespace BubbleNewsSite.Controllers
             {
                 return NotFound();
             }
-            EditUserViewModel model = new EditUserViewModel { Id = user.Id, Email = user.Email, Name = user.Name };
+            EditUserViewModel model = new EditUserViewModel { Id = user.Id, Email = user.Email, Name = user.Name,
+                FirstName = user.FirstName, LastName = user.LastName, Gender = user.Gender };
             return View(model);
         }
 
@@ -101,6 +103,9 @@ namespace BubbleNewsSite.Controllers
                     user.Email = model.Email;
                     user.UserName = model.Email;
                     user.Name = model.Name;
+                    user.FirstName = model.FirstName;
+                    user.LastName = model.LastName;
+                    user.Gender = model.Gender;
 
                     var result = await _userManager.UpdateAsync(user);
                     if (result.Succeeded)

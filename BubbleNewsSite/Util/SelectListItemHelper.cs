@@ -19,5 +19,16 @@ namespace BubbleNewsSite.Util
             };
             return items;
         }
+
+        public static IEnumerable<SelectListItem> Gender()
+        {
+            IList<SelectListItem> items = new List<SelectListItem>
+            {
+                new SelectListItem{Text = "Not chosen", Value = "NotСhosen"},
+                new SelectListItem{Text = "Male", Value = "Male"},
+                new SelectListItem{Text = "Female", Value = "Female"},
+            };
+            return items;
+        }
     }
 }

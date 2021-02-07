@@ -38,7 +38,8 @@ namespace BubbleNewsSite.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User { Name = model.Name, UserName = model.Email, Email = model.Email};
+                User user = new User { Name = model.Name, FirstName = model.FirstName, LastName = model.LastName,
+                    Gender = model.Gender, UserName = model.Email, Email = model.Email};
 
                 if (model.Avatar != null)
                 {
@@ -242,12 +243,20 @@ namespace BubbleNewsSite.Controllers
         }
         #endregion
 
-        #region CheckUniqueName
+        #region Validation
         [AcceptVerbs("Get", "Post")]
         public IActionResult CheckName(string name)
         {
             var getName = from n in db.Users.Where(nm => nm.Name.Contains(name)) select n;
             if (getName.FirstOrDefault(nm => nm.Name == name) != null)
+                return Json(false);
+            return Json(true);
+        }
+
+        public IActionResult CheckEmail(string email)
+        {
+            var getName = from n in db.Users.Where(nm => nm.Email.Contains(email)) select n;
+            if (getName.FirstOrDefault(nm => nm.Email == email) != null)
                 return Json(false);
             return Json(true);
         }

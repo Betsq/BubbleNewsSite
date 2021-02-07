@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BubbleNewsSite.ViewModels
 {
@@ -16,8 +12,22 @@ namespace BubbleNewsSite.ViewModels
         public string Name { get; set; }
 
         [Required]
+        [Display(Name = "First name")]
+        [StringLength(20, MinimumLength = 1, ErrorMessage = "The length must be between 1 and 20 characters")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Last name")]
+        [StringLength(20, MinimumLength = 1, ErrorMessage = "The length must be between 1 and 20 characters")]
+        public string LastName { get; set; }
+        [Required]
+        [Display(Name = "Gender")]
+        public string Gender { get; set; }
+
+        [Required]
         [Display(Name = "Email")]
         [DataType(DataType.EmailAddress)]
+        [Remote(action: "CheckEmail", controller: "Account", ErrorMessage = "Email is busy")]
         public string Email { get; set; }
 
         [Required]

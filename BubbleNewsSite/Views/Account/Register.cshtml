@@ -7,30 +7,44 @@
     <div asp-validation-summary="ModelOnly"></div>
     <div>
         <label asp-for="Name"></label><br />
-        <input asp-for="Name" />
+        <input asp-for="Name" class="form-control"/>
         <span asp-validation-for="Name"></span>
     </div>
     <div>
+        <label asp-for="FirstName"></label><br />
+        <input asp-for="FirstName" class="form-control"/>
+        <span asp-validation-for="FirstName"></span>
+    </div>
+    <div>
+        <label asp-for="LastName"></label><br />
+        <input asp-for="LastName" class="form-control"/>
+        <span asp-validation-for="LastName"></span>
+    </div>
+    <div>
+        <label asp-for="Gender"></label><br />
+        <select asp-for="Gender" asp-items="BubbleNewsSite.Util.SelectListItemHelper.Gender()" class="form-control"></select>
+    </div>
+    <div>
         <label asp-for="Email"></label><br />
-        <input asp-for="Email" />
+        <input asp-for="Email" class="form-control"/>
         <span asp-validation-for="Email"></span>
     </div>
     <div>
         <label asp-for="Password"></label><br />
-        <input asp-for="Password" />
+        <input asp-for="Password" class="form-control"/>
         <span asp-validation-for="Password"></span>
     </div>
     <div>
         <label asp-for="PasswordConfirm"></label><br />
-        <input asp-for="PasswordConfirm" />
+        <input asp-for="PasswordConfirm" class="form-control" />
         <span asp-validation-for="PasswordConfirm"></span>
     </div>
     <div>
         <label asp-for="Avatar"></label><br />
-        <input asp-for="Avatar" type="file" class="form-control"/>
+        <input asp-for="Avatar" type="file" class="form-control" />
         <span asp-validation-for="Avatar"></span>
     </div>
     <div>
-        <input type="submit" value="Register" />
+        <input type="submit" value="Register" class="mt-1"/>
     </div>
 </form>
