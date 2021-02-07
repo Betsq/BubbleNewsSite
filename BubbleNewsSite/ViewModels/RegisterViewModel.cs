@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,6 +12,7 @@ namespace BubbleNewsSite.ViewModels
     {
         [Required]
         [Display(Name = "Username")]
+        [Remote(action: "CheckName", controller: "Account", ErrorMessage = "Username is busy")]
         public string Name { get; set; }
 
         [Required]

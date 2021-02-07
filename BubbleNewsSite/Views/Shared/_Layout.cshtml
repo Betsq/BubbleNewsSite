@@ -7,7 +7,7 @@
     {
         ViewBag.GetUserAvatar = userManager.GetUserAsync(User).Result.Avatar;
     }
-    
+
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -23,6 +23,7 @@
             selector: '#mytextarea'
         });
     </script>
+
 </head>
 <body>
     <header>
@@ -55,13 +56,17 @@
             </div>
             @if (User.Identity.IsAuthenticated)
             {
-                <p></p>
-                <a class="nav-link text-dark" asp-controller="Account" asp-action="MyPersonalCabinet" asp-route-id="@GetUserId">My Cabinet</a>
                 @if (ViewBag.GetUserAvatar != null)
                 {
-                        
-
-                        <img style='width:80px; height:60px;' src="data:image/jpeg;base64,@(Convert.ToBase64String(ViewBag.GetUserAvatar))" />
+                    <a asp-controller="Account" asp-action="MyPersonalCabinet" asp-route-id="@GetUserId">
+                        <img class="mr-1 ml-1" style="border-radius: 50%; width: 50px; height: 50px;" src="data:image/jpeg;base64,@(Convert.ToBase64String(ViewBag.GetUserAvatar))" />
+                    </a>
+                }
+                else
+                {
+                    <a asp-controller="Account" asp-action="MyPersonalCabinet" asp-route-id="@GetUserId">
+                        <img class="mr-1 ml-1" style="border-radius: 50%; width: 50px; height: 50px;" src="~/Avatar/UnknownAvatar.jpg" />
+                    </a>
                 }
                 <form method="post" asp-controller="Account" asp-action="Logout">
                     <input type="submit" value="Выход" />
@@ -100,7 +105,8 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

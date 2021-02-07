@@ -17,14 +17,15 @@ namespace BubbleNewsSite.Controllers
 {
     public class AccountController : Controller
     {
+        private readonly NewsContext db;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
        
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, NewsContext newsContext)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            
+            db = newsContext;
         }
         #region Register
         [HttpGet]
@@ -238,7 +239,18 @@ namespace BubbleNewsSite.Controllers
                 return View(user);
             }
             return NotFound();
-        }        
+        }
+        #endregion
+
+        #region CheckUniqueName
+        [AcceptVerbs("Get", "Post")]
+        public IActionResult CheckName(string name)
+        {
+            var getName = from n in db.Users.Where(nm => nm.Name.Contains(name)) select n;
+            if (getName.FirstOrDefault(nm => nm.Name == name) != null)
+                return Json(false);
+            return Json(true);
+        }
         #endregion
     }
 }
