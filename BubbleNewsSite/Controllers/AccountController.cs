@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -31,13 +32,28 @@ namespace BubbleNewsSite.Controllers
         {
             return View();
         }
+        [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                User user = new User { Name = model.Name, UserName = model.Email, Email = model.Email };
+                User user = new User { Name = model.Name, UserName = model.Email, Email = model.Email};
+
+                if (model.Avatar != null)
+                {
+                    byte[] imageData = null;
+                    // read the transferred file into a byte array
+                    using (var binaryReader = new BinaryReader(model.Avatar.OpenReadStream()))
+                    {
+                        imageData = binaryReader.ReadBytes((int)model.Avatar.Length);
+                    }
+                    // setting a byte array
+                    user.Avatar = imageData;
+                }
+
+
                 var result = await _userManager.CreateAsync(user, model.Password);
-                
+
                 if (result.Succeeded)
                 {
                     var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);

@@ -3,7 +3,7 @@
     ViewBag.Title = "New user";
 }
 <h2>New User Registration</h2>
-<form method="post" asp-controller="Account" asp-action="Register">
+<form method="post" asp-controller="Account" asp-action="Register" enctype="multipart/form-data">
     <div asp-validation-summary="ModelOnly"></div>
     <div>
         <label asp-for="Name"></label><br />
@@ -24,6 +24,11 @@
         <label asp-for="PasswordConfirm"></label><br />
         <input asp-for="PasswordConfirm" />
         <span asp-validation-for="PasswordConfirm"></span>
+    </div>
+    <div>
+        <label asp-for="Avatar"></label><br />
+        <input asp-for="Avatar" type="file" class="form-control"/>
+        <span asp-validation-for="Avatar"></span>
     </div>
     <div>
         <input type="submit" value="Register" />

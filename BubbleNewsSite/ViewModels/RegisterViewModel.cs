@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -28,5 +29,8 @@ namespace BubbleNewsSite.ViewModels
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         public string PasswordConfirm { get; set; }
+
+        [Display(Name ="Avatar")]
+        public IFormFile Avatar { get; set; }
     }
 }

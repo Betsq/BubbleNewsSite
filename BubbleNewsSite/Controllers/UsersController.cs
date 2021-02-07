@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using BubbleNewsSite.Models;
 using BubbleNewsSite.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using System.IO;
 
 namespace BubbleNewsSite.Controllers
 {
@@ -16,7 +17,10 @@ namespace BubbleNewsSite.Controllers
         {
             _userManager = userManager;
         }
-        public IActionResult Index() => View(_userManager.Users.ToList());
+        public IActionResult Index()
+        {
+            return View(_userManager.Users.ToList());
+        }
 
         #region Create
         public IActionResult Create()
@@ -30,7 +34,20 @@ namespace BubbleNewsSite.Controllers
             if (ModelState.IsValid)
             {
                 User user = new User() { Name = model.Name, UserName = model.Email, Email = model.Email };
+                if (model.Avatar != null)
+                {
+                    byte[] imageData = null;
+                    // read the transferred file into a byte array
+                    using (var binaryReader = new BinaryReader(model.Avatar.OpenReadStream()))
+                    {
+                        imageData = binaryReader.ReadBytes((int)model.Avatar.Length);
+                    }
+                    // setting a byte array
+                    user.Avatar = imageData;
+                }
+
                 var result = await _userManager.CreateAsync(user, model.Password);
+
                 if (result.Succeeded)
                 {
                     return RedirectToAction("Index");
@@ -51,6 +68,7 @@ namespace BubbleNewsSite.Controllers
         public async Task<IActionResult> Edit(string id)
         {
             User user = await _userManager.FindByIdAsync(id);
+            
             if (user == null)
             {
                 return NotFound();
@@ -65,7 +83,20 @@ namespace BubbleNewsSite.Controllers
             if (ModelState.IsValid)
             {
                 User user = await _userManager.FindByIdAsync(model.Id);
-                if(user != null)
+
+                if (model.Avatar != null)
+                {
+                    byte[] imageData = null;
+                    // read the transferred file into a byte array
+                    using (var binaryReader = new BinaryReader(model.Avatar.OpenReadStream()))
+                    {
+                        imageData = binaryReader.ReadBytes((int)model.Avatar.Length);
+                    }
+                    // setting a byte array
+                    user.Avatar = imageData;
+                }
+
+                if (user != null)
                 {
                     user.Email = model.Email;
                     user.UserName = model.Email;
