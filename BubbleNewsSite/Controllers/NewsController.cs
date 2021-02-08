@@ -21,10 +21,10 @@ namespace BubbleNewsSite.Controllers
             if (typeNews != null)
             {
                 nw = nw.Where(ne => ne.NewsType.Contains(typeNews) && ne.HideNews != true);
-                return View(await nw.ToListAsync());
+                
+                return View(await nw.OrderByDescending(ne => ne.DateCreateNews).ToListAsync());
             }
-
-            return View(await db.News.Where(ne => ne.HideNews != true).ToListAsync());
+            return View(await db.News.Where(ne => ne.HideNews != true).OrderByDescending(ne => ne.DateCreateNews).ToListAsync());
         }
 
         public async Task<IActionResult> NewsCRUD()
@@ -41,7 +41,10 @@ namespace BubbleNewsSite.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(News news)
         {
-            db.News.Add(news);
+            var getCurTime = DateTime.Now;
+            var nw = new News { NewsType = news.NewsType, Article = news.Article, Description = news.Description,
+                HideNews = news.HideNews, Img = news.Img, DateCreateNews = getCurTime };
+            db.News.Add(nw);
             await db.SaveChangesAsync();
             return RedirectToAction("News");
         }
@@ -108,5 +111,18 @@ namespace BubbleNewsSite.Controllers
             return NotFound();
         }
         #endregion
+
+        public async Task<IActionResult> NewsPage(int? id)
+        {
+            if (id != null)
+            {
+                News news = await db.News.FirstOrDefaultAsync(ne => ne.Id == id);
+                if (news != null)
+                {
+                    return View(news);
+                }
+            }
+            return NotFound();
+        }
     }
 }

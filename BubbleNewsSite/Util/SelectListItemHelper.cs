@@ -12,10 +12,10 @@ namespace BubbleNewsSite.Util
                 new SelectListItem{Text = "Phone", Value = "Phone"},
                 new SelectListItem{Text = "PC", Value = "PC"},
                 new SelectListItem{Text = "Laptop", Value = "Laptop"},
-                new SelectListItem{Text = "IT Company", Value = "ITCompany"},
+                new SelectListItem{Text = "IT", Value = "IT"},
                 new SelectListItem{Text = "Messenger", Value = "Messenger"},
-                new SelectListItem{Text = "Social network", Value = "SocialNetwork"},
-                new SelectListItem{Text = "Computer hardware", Value = "ComputerHardware"},
+                new SelectListItem{Text = "Social network", Value = "Social Network"},
+                new SelectListItem{Text = "Computer hardware", Value = "Computer Hardware"},
             };
             return items;
         }

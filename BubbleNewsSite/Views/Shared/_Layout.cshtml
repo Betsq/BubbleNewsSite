@@ -27,7 +27,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light mb-0">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BubbleNewsSite</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -80,15 +80,15 @@
         </nav>
     </header>
 
-    <div class="container" style="background-color: aqua;">
-        <div class="list-group list-group-horizontal justify-content-center">
-            <a class="nav-link text-dark" asp-controller="News" asp-action="news" asp-route-typeNews="Phone">Phone</a>
+    <div class="container pt-0 mt-0 navbar-light border-bottom rounded-bottom">
+        <div class="list-group list-group-horizontal justify-content-center col-md-12 flex-wrap">
+            <a class="nav-link text-dark" asp-controller="News" asp-action="news" asp-route-typeNews="IT">IT</a>
             <a class="nav-link text-dark" asp-controller="News" asp-action="news" asp-route-typeNews="PC">PC</a>
+            <a class="nav-link text-dark" asp-controller="News" asp-action="news" asp-route-typeNews="Phone">Phone</a>
             <a class="nav-link text-dark" asp-controller="News" asp-action="news" asp-route-typeNews="Laptop">Laptop</a>
-            <a class="nav-link text-dark" asp-controller="News" asp-action="news" asp-route-typeNews="ITCompany">IT Company</a>
             <a class="nav-link text-dark" asp-controller="News" asp-action="news" asp-route-typeNews="Messenger">Messenger</a>
-            <a class="nav-link text-dark" asp-controller="News" asp-action="news" asp-route-typeNews="SocialNetwork">Social Network</a>
-            <a class="nav-link text-dark" asp-controller="News" asp-action="news" asp-route-typeNews="ComputerHardware">Computer Hardware</a>
+            <a class="nav-link text-dark" asp-controller="News" asp-action="news" asp-route-typeNews="Social Network">Social Network</a>
+            <a class="nav-link text-dark" asp-controller="News" asp-action="news" asp-route-typeNews="Computer Hardware">Computer Hardware</a>
         </div>
     </div>
     <div class="container">
