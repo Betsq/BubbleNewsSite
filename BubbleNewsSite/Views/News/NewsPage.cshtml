@@ -4,9 +4,9 @@
     ViewBag.Title = "News";
 }
 
-<div class="col-md-12">
+<div class="col-md-8">
     <div class="col-md-12 d-flex flex-wrap justify-content-center mt-3 mb-2 border-bottom">
-        <img class="col-md-8 mb-3" src="@Model.Img" alt="@Model.Img" />
+        <img class="col-md-10 mb-3" src="@Model.Img" alt="@Model.Img" />
     </div>
     <div class="col-md-12 mb-5 text-center">
         <h4>
@@ -15,5 +15,8 @@
     </div>
     <div class="col-md-12">
         @Html.Raw(Model.Description)
+    </div>
+    <div class="col-md-12  d-flex flex-wrap justify-content-end align-content-end">
+        @Model.NewsType, @Model.DateCreateNews.ToLongDateString() @Model.DateCreateNews.ToShortTimeString() (@Model.WhoCreated)
     </div>
 </div>

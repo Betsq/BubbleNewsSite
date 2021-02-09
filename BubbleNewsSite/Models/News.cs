@@ -26,8 +26,8 @@ namespace BubbleNewsSite.Models
 
         [Display(Name = "Img")]
         public string Img { get; set; } //Temporarily by reference 
-
         public DateTime DateCreateNews { get; set; }
+        public string WhoCreated { get; set; }
         
         [Display(Name = "Hide news?")]
         public bool HideNews { get; set; }

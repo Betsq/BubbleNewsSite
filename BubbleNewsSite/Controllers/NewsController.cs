@@ -1,4 +1,5 @@
 ﻿using BubbleNewsSite.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,9 +12,11 @@ namespace BubbleNewsSite.Controllers
     public class NewsController : Controller
     {
         private readonly NewsContext db;
-        public NewsController(NewsContext newsContext)
+        private readonly UserManager<User> _userManager;
+        public NewsController(NewsContext newsContext, UserManager<User> userManager)
         {
             db = newsContext;
+            _userManager = userManager;
         }
         public async Task<IActionResult> news(string typeNews)
         {
@@ -41,9 +44,15 @@ namespace BubbleNewsSite.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(News news)
         {
+            var getFirstName = _userManager.GetUserAsync(User).Result.FirstName;
+            var getLastName = _userManager.GetUserAsync(User).Result.LastName;
+            string whoCreated = getFirstName + " " + getLastName;
+
             var getCurTime = DateTime.Now;
+
             var nw = new News { NewsType = news.NewsType, Article = news.Article, Description = news.Description,
-                HideNews = news.HideNews, Img = news.Img, DateCreateNews = getCurTime };
+                HideNews = news.HideNews, Img = news.Img, DateCreateNews = getCurTime, WhoCreated = whoCreated };
+
             db.News.Add(nw);
             await db.SaveChangesAsync();
             return RedirectToAction("News");

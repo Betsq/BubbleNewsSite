@@ -12,7 +12,7 @@ namespace BubbleNewsSite.Controllers
     //[Authorize(Roles = "admin")]
     public class UsersController : Controller
     {
-        UserManager<User> _userManager;
+        private readonly UserManager<User> _userManager;
         public UsersController(UserManager<User> userManager)
         {
             _userManager = userManager;
