@@ -20,6 +20,7 @@ namespace BubbleNewsSite.ViewModels
         [Display(Name = "Last name")]
         [StringLength(20, MinimumLength = 1, ErrorMessage = "The length must be between 1 and 20 characters")]
         public string LastName { get; set; }
+
         [Required]
         [Display(Name = "Gender")]
         public string Gender { get; set; }
@@ -32,7 +33,7 @@ namespace BubbleNewsSite.ViewModels
 
         [Required]
         [DataType(DataType.Password)]
-        [StringLength(100, ErrorMessage = "Field {0} must have at least {2} and maximum {1} characters.", MinimumLength = 5)]
+        [StringLength(100, ErrorMessage = "Field {0} must have at least {2} and maximum {1} characters.", MinimumLength = 6)]
         [Display(Name = "Password")]
         public string Password { get; set; }
 

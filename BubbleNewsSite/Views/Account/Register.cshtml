@@ -1,50 +1,57 @@
 ﻿@model BubbleNewsSite.ViewModels.RegisterViewModel
 @{
-    ViewBag.Title = "New user";
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LayoutLogReg.cshtml";
 }
-<h2>New User Registration</h2>
-<form method="post" asp-controller="Account" asp-action="Register" enctype="multipart/form-data">
-    <div asp-validation-summary="ModelOnly"></div>
-    <div>
-        <label asp-for="Name"></label><br />
-        <input asp-for="Name" class="form-control"/>
-        <span asp-validation-for="Name"></span>
+
+<div class="col-md-12 d-flex justify-content-center pt-5 pb-5">
+    <a asp-action="Index" asp-controller="Home">
+        <img src="~/logo/Bubblelogo.png" alt="Logo Bubble News" />
+    </a>
+</div>
+<div class="col-md-12 d-flex flex-wrap justify-content-center">
+    <div class="col-md-6 d-flex flex-wrap justify-content-center">
+
+        <h2 class="col-md-12 d-flex justify-content-center">New user registration</h2>
+
+        <form method="post" asp-controller="Account" asp-action="Register" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly"></div>
+            <div class="col-md-12 pt-3 pb-3">
+                <input asp-for="Name" class="form-control" placeholder="Name" />
+                <span asp-validation-for="Name"></span>
+            </div>
+            <div class="col-md-12 pb-3">
+                <input asp-for="FirstName" class="form-control" placeholder="First name" />
+                <span asp-validation-for="FirstName"></span>
+            </div>
+            <div class="col-md-12 pb-3">
+                <input asp-for="LastName" class="form-control" placeholder="Last name" />
+                <span asp-validation-for="LastName"></span>
+            </div>
+            <div class="col-md-12 pb-3">
+                <select asp-for="Gender" asp-items="BubbleNewsSite.Util.SelectListItemHelper.Gender()" class="form-control"></select>
+            </div>
+            <div class="col-md-12 pb-3">
+                <input asp-for="Email" class="form-control" placeholder="Email" />
+                <span asp-validation-for="Email"></span>
+            </div>
+            <div class="col-md-12 pb-3">
+                <input asp-for="Password" class="form-control" placeholder="Password" />
+                <span asp-validation-for="Password"></span>
+            </div>
+            <div class="col-md-12 pb-3">
+                <input asp-for="PasswordConfirm" class="form-control" placeholder="Password confirm" />
+                <span asp-validation-for="PasswordConfirm"></span>
+            </div>
+            <div class="col-md-12 hidden-block">
+                <input asp-for="Avatar" type="file" class="form-control-file" />
+                <span asp-validation-for="Avatar"></span>
+            </div>
+            <div class="col-md-12 pb-3 d-flex justify-content-end">
+                <input class="btn btn-dark" type="submit" value="Register" />
+            </div>
+        </form>
+        
     </div>
-    <div>
-        <label asp-for="FirstName"></label><br />
-        <input asp-for="FirstName" class="form-control"/>
-        <span asp-validation-for="FirstName"></span>
-    </div>
-    <div>
-        <label asp-for="LastName"></label><br />
-        <input asp-for="LastName" class="form-control"/>
-        <span asp-validation-for="LastName"></span>
-    </div>
-    <div>
-        <label asp-for="Gender"></label><br />
-        <select asp-for="Gender" asp-items="BubbleNewsSite.Util.SelectListItemHelper.Gender()" class="form-control"></select>
-    </div>
-    <div>
-        <label asp-for="Email"></label><br />
-        <input asp-for="Email" class="form-control"/>
-        <span asp-validation-for="Email"></span>
-    </div>
-    <div>
-        <label asp-for="Password"></label><br />
-        <input asp-for="Password" class="form-control"/>
-        <span asp-validation-for="Password"></span>
-    </div>
-    <div>
-        <label asp-for="PasswordConfirm"></label><br />
-        <input asp-for="PasswordConfirm" class="form-control" />
-        <span asp-validation-for="PasswordConfirm"></span>
-    </div>
-    <div>
-        <label asp-for="Avatar"></label><br />
-        <input asp-for="Avatar" type="file" class="form-control" />
-        <span asp-validation-for="Avatar"></span>
-    </div>
-    <div>
-        <input type="submit" value="Register" class="mt-1"/>
-    </div>
-</form>
+    
+</div>
