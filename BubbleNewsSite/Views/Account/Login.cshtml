@@ -1,24 +1,38 @@
 ﻿@model BubbleNewsSite.ViewModels.LoginViewModel
-
-<h2>Sign in</h2>
-<form method="post" asp-controller="Account" asp-action="Login"
-            asp-route-returnUrl="@Model.ReturnUrl">
-    <div asp-validation-summary="ModelOnly"></div>
-    <div>
-        <label asp-for="Email"></label><br />
-        <input asp-for="Email" />
-        <span asp-validation-for="Email"></span>
+@{
+    Layout = "~/Views/Shared/_LayoutLogReg.cshtml";
+}
+<div class="col-md-12 pt-5 pb-5 d-flex justify-content-center">
+    <a asp-action="Index" asp-controller="Home">
+        <img src="~/logo/Bubblelogo.png" alt="Logo bubbles news" />
+    </a>
+</div>
+<div class="col-md-12 d-flex flex-wrap justify-content-center align-content-center">
+    <div class="col-md-4 d-flex flex-wrap justify-content-center">
+        <h2 class="col-md-12 d-flex justify-content-center align-content-center">Sign in</h2>
+        <form method="post" asp-controller="Account" asp-action="Login"
+                    asp-route-returnUrl="@Model.ReturnUrl">
+            <div class="col-md-12" asp-validation-summary="ModelOnly"></div>
+            <div class="col-md-12 pt-3 pb-3">
+                <input class="form-control" asp-for="Email" placeholder="Enter email"/>
+                <span asp-validation-for="Email"></span>
+            </div>
+            <div class="col-md-12 pb-3">
+                <input class="form-control" asp-for="Password" placeholder="Password"/>
+                <span asp-validation-for="Password"></span>
+            </div>
+            <div class="col-md-12 form-check d-flex pb-3 ml-3">
+                <label class="form-check-label" asp-for="RememberMe"></label><br />
+                <input class="form-check-input" asp-for="RememberMe" />
+            </div>
+            <div class="col-md-12 pb-3 d-flex justify-content-end">
+                <input class="btn btn-dark d-flex justify-content-end" type="submit" value="Sign in" />
+            </div>
+        </form>
+        <div class="col-md-12 d-flex">
+            <a class="col-md-4 d-flex justify-content-start text-decoration-none text-secondary" asp-action="Register" asp-controller="Account">Register</a>
+            <a class="col-md-8 d-flex justify-content-end text-decoration-none text-secondary" asp-action="ForgotPassword" asp-controller="Account">Forgot password?</a>
+        </div>
+        
     </div>
-    <div>
-        <label asp-for="Password"></label><br />
-        <input asp-for="Password" />
-        <span asp-validation-for="Password"></span>
-    </div>
-    <div>
-        <label asp-for="RememberMe"></label><br />
-        <input asp-for="RememberMe" />
-    </div>
-    <div>
-        <input type="submit" value="Sign in" />
-    </div>
-</form>
+</div>
