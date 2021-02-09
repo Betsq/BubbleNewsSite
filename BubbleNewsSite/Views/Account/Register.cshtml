@@ -14,44 +14,38 @@
 
         <h2 class="col-md-12 d-flex justify-content-center">New user registration</h2>
 
-        <form method="post" asp-controller="Account" asp-action="Register" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly"></div>
+        <form class="col-md-12" method="post" asp-controller="Account" asp-action="Register" enctype="multipart/form-data">
+            <div class="text-danger" asp-validation-summary="ModelOnly"></div>
             <div class="col-md-12 pt-3 pb-3">
                 <input asp-for="Name" class="form-control" placeholder="Name" />
-                <span asp-validation-for="Name"></span>
+                <span class="text-danger" asp-validation-for="Name"></span>
             </div>
             <div class="col-md-12 pb-3">
-                <input asp-for="FirstName" class="form-control" placeholder="First name" />
-                <span asp-validation-for="FirstName"></span>
+                <input class="form-control" asp-for="FirstName"  placeholder="First name" />
+                <span class="text-danger" asp-validation-for="FirstName"></span>
             </div>
             <div class="col-md-12 pb-3">
                 <input asp-for="LastName" class="form-control" placeholder="Last name" />
-                <span asp-validation-for="LastName"></span>
+                <span class="text-danger" asp-validation-for="LastName"></span>
             </div>
             <div class="col-md-12 pb-3">
                 <select asp-for="Gender" asp-items="BubbleNewsSite.Util.SelectListItemHelper.Gender()" class="form-control"></select>
             </div>
             <div class="col-md-12 pb-3">
-                <input asp-for="Email" class="form-control" placeholder="Email" />
-                <span asp-validation-for="Email"></span>
+                <input class="form-control" asp-for="Email" placeholder="Email" />
+                <span class="text-danger" asp-validation-for="Email" ></span>
             </div>
             <div class="col-md-12 pb-3">
                 <input asp-for="Password" class="form-control" placeholder="Password" />
-                <span asp-validation-for="Password"></span>
+                <span class="text-danger" asp-validation-for="Password"></span>
             </div>
             <div class="col-md-12 pb-3">
-                <input asp-for="PasswordConfirm" class="form-control" placeholder="Password confirm" />
-                <span asp-validation-for="PasswordConfirm"></span>
-            </div>
-            <div class="col-md-12 hidden-block">
-                <input asp-for="Avatar" type="file" class="form-control-file" />
-                <span asp-validation-for="Avatar"></span>
+                <input class="form-control" asp-for="PasswordConfirm" placeholder="Password confirm" />
+                <span class="text-danger" asp-validation-for="PasswordConfirm"></span>
             </div>
             <div class="col-md-12 pb-3 d-flex justify-content-end">
                 <input class="btn btn-dark" type="submit" value="Register" />
             </div>
         </form>
-        
     </div>
-    
 </div>

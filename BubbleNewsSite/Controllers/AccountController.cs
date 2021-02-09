@@ -20,7 +20,7 @@ namespace BubbleNewsSite.Controllers
         private readonly NewsContext db;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-       
+
         public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, NewsContext newsContext)
         {
             _userManager = userManager;
@@ -38,8 +38,15 @@ namespace BubbleNewsSite.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User { Name = model.Name, FirstName = model.FirstName, LastName = model.LastName,
-                    Gender = model.Gender, UserName = model.Email, Email = model.Email};
+                User user = new User
+                {
+                    Name = model.Name,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Gender = model.Gender,
+                    UserName = model.Email,
+                    Email = model.Email
+                };
 
                 if (model.Avatar != null)
                 {
@@ -61,8 +68,8 @@ namespace BubbleNewsSite.Controllers
                     var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
                     var confiramtionLink = Url.Action("ConfirmEmail", "Account",
-                        new {userId = user.Id, token = token }, Request.Scheme);
-                    
+                        new { userId = user.Id, token = token }, Request.Scheme);
+
 
                     EmailService emailService = new EmailService();
                     await emailService.SendEmailAsync(model.Email, "Confirm your account",
@@ -86,7 +93,7 @@ namespace BubbleNewsSite.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail(string userId, string token)
         {
-            if(userId == null || token == null)
+            if (userId == null || token == null)
                 return View("Error");
 
             var user = await _userManager.FindByIdAsync(userId);
@@ -226,6 +233,52 @@ namespace BubbleNewsSite.Controllers
         }
         #endregion
 
+        #region ChangePassword
+        [HttpGet]
+        public async Task<IActionResult> ChangePasswordCurUser()
+        {
+            var GetUserId = _userManager.GetUserId(User);
+
+            User user = await _userManager.FindByIdAsync(GetUserId);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+            UserChangePasswordViewModel model = new UserChangePasswordViewModel { Id = user.Id, Email = user.Email };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePasswordCurUser(UserChangePasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = await _userManager.FindByIdAsync(model.Id);
+                if (user != null)
+                {
+                    IdentityResult result = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("Index","Home");
+                    }
+                    else
+                    {
+                        foreach (var error in result.Errors)
+                        {
+                            ModelState.AddModelError(string.Empty, error.Description);
+                        }
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "User not found");
+                }
+            }
+            return View(model);
+        }
+        #endregion
+
         #region MyPersonalCabinet 
 
         [Authorize]
@@ -234,7 +287,7 @@ namespace BubbleNewsSite.Controllers
 
             var user = await _userManager.FindByIdAsync(id);
             var userId = _userManager.GetUserId(HttpContext.User);
-            
+
             if (user != null && userId == id)
             {
                 return View(user);

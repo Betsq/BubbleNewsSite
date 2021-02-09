@@ -11,8 +11,7 @@
 <div class="col-md-12 d-flex flex-wrap justify-content-center align-content-center">
     <div class="col-md-4 d-flex flex-wrap justify-content-center">
         <h2 class="col-md-12 d-flex justify-content-center align-content-center">Sign in</h2>
-        <form method="post" asp-controller="Account" asp-action="Login"
-                    asp-route-returnUrl="@Model.ReturnUrl">
+        <form class="col-md-12" method="post" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl">
             <div class="col-md-12" asp-validation-summary="ModelOnly"></div>
             <div class="col-md-12 pt-3 pb-3">
                 <input class="form-control" asp-for="Email" placeholder="Enter email"/>
