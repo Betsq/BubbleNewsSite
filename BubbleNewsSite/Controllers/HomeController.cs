@@ -1,8 +1,7 @@
 ﻿using BubbleNewsSite.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,14 +12,18 @@ namespace BubbleNewsSite.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+       private readonly  NewsContext db;
+
+        public HomeController(ILogger<HomeController> logger, NewsContext newsContext)
         {
+            db = newsContext;
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> IndexAsync()
         {
-            return View();
+            var news = from nw in db.News select nw;
+            return View(await db.News.Where(ne => ne.HideNews != true).OrderByDescending(ne => ne.DateCreateNews).ToListAsync());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

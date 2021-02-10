@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -32,7 +31,7 @@ namespace BubbleNewsSite.Controllers
 
         public async Task<IActionResult> NewsCRUD()
         {
-            return View(await db.News.ToListAsync());
+            return View(await db.News.OrderByDescending(ne => ne.DateCreateNews).ToListAsync());
         }
 
         #region Create
@@ -51,7 +50,9 @@ namespace BubbleNewsSite.Controllers
             var getCurTime = DateTime.Now;
 
             var nw = new News { NewsType = news.NewsType, Article = news.Article, Description = news.Description,
-                HideNews = news.HideNews, Img = news.Img, DateCreateNews = getCurTime, WhoCreated = whoCreated };
+                HideNews = news.HideNews, Img = news.Img, DateCreateNews = getCurTime, WhoCreated = whoCreated,
+                IsNewsDay = news.IsNewsDay, IsNewsWeek = news.IsNewsWeek
+            };
 
             db.News.Add(nw);
             await db.SaveChangesAsync();

@@ -1,4 +1,42 @@
-﻿@{
+﻿@model IEnumerable<BubbleNewsSite.Models.News>
+@{
     ViewData["Title"] = "Home";
+    int IsHaveNewsDay = 0;
+    int IsHaveNewsWeek = 0;
 }
 
+<div class="col-md-12 d-flex flex-wrap">
+
+    <div class="col-md-9 d-flex flex-wrap">
+        @foreach (var n in Model)
+        {
+            @if (IsHaveNewsDay == 0 && n.IsNewsDay != false)
+            {
+                <div class="col-md-12 d-flex justify-content-center">
+                    <a asp-action="NewsPage" asp-controller="News" asp-route-id="@n.Id">
+                        <img src="@n.Img" alt="Alternate Text" style="height: 100px;width:100px;" />
+                    </a>
+                    News day
+                </div>
+                IsHaveNewsDay++;
+            }
+            @if (IsHaveNewsWeek == 0 && n.IsNewsWeek != false)
+            {
+                <div class="col-md-12 d-flex justify-content-center">
+                    <a asp-action="NewsPage" asp-controller="News" asp-route-id="@n.Id">
+                        <img src="@n.Img" alt="Alternate Text" style="height: 100px;width:100px;" />
+                    </a>
+                </div>
+            }
+
+
+        }
+        <div class="col-md-12">
+            News
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        ddd
+    </div>
+</div>

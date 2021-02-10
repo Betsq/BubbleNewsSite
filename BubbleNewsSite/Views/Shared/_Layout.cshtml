@@ -71,13 +71,13 @@
                     </a>
                 }
                 <form method="post" asp-controller="Account" asp-action="Logout">
-                    <input type="submit" value="Sign out" />
+                    <input class="m-1 btn btn-secondary" type="submit" value="Sign out" />
                 </form>
             }
             else
             {
-                <a asp-controller="Account" asp-action="Login" class="m-1">Sign in</a>
-                <a asp-controller="Account" asp-action="Register" class="m-1">Register</a>
+                <a class="m-1 btn btn-secondary" asp-controller="Account" asp-action="Login">Sign in</a>
+                <a class="m-1 btn btn-secondary" asp-controller="Account" asp-action="Register">Register</a>
             }
         </nav>
     </header>

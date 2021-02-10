@@ -1,9 +1,38 @@
 ﻿@model BubbleNewsSite.Models.User
 
-@Model.Id
-@if (Model.Avatar != null)
-{
-    <img style='width:80px; height:60px;' src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Avatar))" />
-}
+<div class="col-12 d-flex flex-wrap pt-5">
+    <div class="col-md-4 d-flex">
+        @if (Model.Avatar != null)
+        {
+            <img style="border-radius: 50%; width:252px; height:252px;" src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Avatar))" />
+        }
+        else
+        {
+            <img style="border-radius: 50%; width:252px; height:252px;" src="~/Avatar/UnknownAvatar.jpg" />
+        }
 
-<a asp-action="ChangePasswordCurUser" asp-controller="Account">Change password</a>
+    </div>
+    <div class="col-md-8 d-flex flex-wrap">
+        <h3 class="col-md-12 d-flex justify-content-center pb-3">
+            Account @Model.Name
+        </h3>
+
+        <div class="col-md-12">
+            <h3>First name: @Model.FirstName</h3>
+        </div>
+        <div class="col-md-12">
+            <h3>Last name : @Model.LastName</h3>
+        </div>
+        <div class="col-md-12">
+            <h3><a class="text-decoration-none text-primary" asp-action="ChangePasswordCurUser" asp-controller="Account">Change password</a></h3>
+        </div>
+        <div class="col-md-12">
+            <h3>Your email: @Model.Email</h3>
+        </div>
+
+    </div>
+</div>
+
+
+
+

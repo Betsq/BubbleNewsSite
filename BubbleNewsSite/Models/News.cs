@@ -31,5 +31,9 @@ namespace BubbleNewsSite.Models
         
         [Display(Name = "Hide news?")]
         public bool HideNews { get; set; }
+        [Display(Name = "Is this the news of the week?")]
+        public bool IsNewsWeek { get; set; }
+        [Display(Name = "Is this the news of the day?")]
+        public bool IsNewsDay { get; set; }
     }
 }

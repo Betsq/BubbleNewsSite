@@ -1,21 +1,28 @@
 ﻿@model IEnumerable<BubbleNewsSite.Models.News>
 
-@{ 
-    ViewBag.Title = "CDDE";
+@{
+    ViewBag.Title = "CRUD";
 }
-<a asp-action="Create" class="btn btn-sm btn-primary m-1">Add news</a>
-<table class="table">
-    <tr><td>Article</td><td>News type</td></tr>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@item.Article</td>
-            <td>@item.NewsType</td>
-            <td>
-                <a class="btn btn-sm btn-primary" asp-action="Details" asp-controller="News" asp-route-id="@item.Id">Details</a>
-                <a class="btn btn-sm btn-primary" asp-action="Edit" asp-controller="News" asp-route-id="@item.Id">Edit</a>
-                <a class="btn btn-sm btn-danger" asp-action="Delete" asp-controller="News" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-    }
-</table>
+<div class="col-md-12 d-flex flex-wrap justify-content-center">
+    <div class="col-md-12 pt-2 pb-2 d-flex justify-content-end">
+        <a class="col-md-1 btn btn-sm btn-primary" asp-action="Create" asp-controller="News">Add news</a>
+    </div>
+
+    <table class="table">
+        <tr><td>Article</td><td>News type</td><td>Date create</td><td>Details | Edit | Delete</td></tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td >@item.Article</td>
+                <td>@item.NewsType</td>
+                <td>@item.DateCreateNews.ToShortDateString()</td>
+                <td width="18%">
+                    <a class="btn btn-sm btn-primary" asp-action="Details" asp-controller="News" asp-route-id="@item.Id">Details</a>
+                    <a class="btn btn-sm btn-primary" asp-action="Edit" asp-controller="News" asp-route-id="@item.Id">Edit</a>
+                    <a class="btn btn-sm btn-danger" asp-action="Delete" asp-controller="News" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
