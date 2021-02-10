@@ -3,40 +3,40 @@
     ViewBag.Title = "User editing";
 }
 <form asp-action="Edit" asp-controller="Users" enctype="multipart/form-data">
-    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="text-danger" asp-validation-summary="All" ></div>
     <div class="form-group">
         <input type="hidden" asp-for="Id" />
     </div>
     <div class="form-group">
-        <label asp-for="Name" class="control-label">Name</label>
-        <input type="text" asp-for="Name" class="form-control" />
+        <label class="control-label" asp-for="Name">Name</label>
+        <input class="form-control"  type="text" asp-for="Name" />
         <span asp-validation-for="Name"></span>
     </div>
     <div>
         <label asp-for="FirstName"></label><br />
-        <input asp-for="FirstName" class="form-control" />
+        <input class="form-control"  asp-for="FirstName" />
         <span asp-validation-for="FirstName"></span>
     </div>
     <div>
         <label asp-for="LastName"></label><br />
-        <input asp-for="LastName" class="form-control" />
+        <input  class="form-control" asp-for="LastName" />
         <span asp-validation-for="LastName"></span>
     </div>
     <div>
         <label asp-for="Gender"></label><br />
-        <select asp-for="Gender" asp-items="BubbleNewsSite.Util.SelectListItemHelper.Gender()" class="form-control"></select>
+        <select class="form-control" asp-for="Gender" asp-items="BubbleNewsSite.Util.SelectListItemHelper.Gender()"></select>
     </div>
     <div class="form-group">
         <label asp-for="Email" class="control-label">Email</label>
-        <input type="text" asp-for="Email" class="form-control" />
+        <input class="form-control" type="text" asp-for="Email" />
         <span asp-validation-for="Email"></span>
     </div>
     <div>
         <label asp-for="Avatar"></label><br />
-        <input asp-for="Avatar" type="file" class="form-control" />
+        <input class="form-control" asp-for="Avatar" type="file" multiple  accept="image/*"/>
         <span asp-validation-for="Avatar"></span>
     </div>
     <div class="form-group">
-        <input type="submit" value="Save" class="btn btn-outline-secondary" />
+        <input class="btn btn-outline-secondary" type="submit" value="Save" />
     </div>
 </form>

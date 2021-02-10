@@ -14,9 +14,8 @@
             {
                 <div class="col-md-12 d-flex justify-content-center">
                     <a asp-action="NewsPage" asp-controller="News" asp-route-id="@n.Id">
-                        <img src="@n.Img" alt="Alternate Text" style="height: 100px;width:100px;" />
+                        <img class="img-fluid" src="@n.Img" alt="@n.Article"/>
                     </a>
-                    News day
                 </div>
                 IsHaveNewsDay++;
             }
@@ -24,7 +23,7 @@
             {
                 <div class="col-md-12 d-flex justify-content-center">
                     <a asp-action="NewsPage" asp-controller="News" asp-route-id="@n.Id">
-                        <img src="@n.Img" alt="Alternate Text" style="height: 100px;width:100px;" />
+                        <img class="img-fluid" src="@n.Img" alt="@n.Article"/>
                     </a>
                 </div>
             }

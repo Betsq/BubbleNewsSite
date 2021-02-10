@@ -27,6 +27,24 @@
         {
             <dd>No</dd>
         }
+        <dt>Is this the news of the day?</dt>
+        @if (Model.IsNewsDay == true)
+        {
+            <dd>Yes</dd>
+        }
+        else
+        {
+            <dd>No</dd>
+        }
+        <dt>Is this the news of the wekk?</dt>
+        @if (Model.IsNewsWeek == true)
+        {
+            <dd>Yes</dd>
+        }
+        else
+        {
+            <dd>No</dd>
+        }
     </dl>
 </div>
 
