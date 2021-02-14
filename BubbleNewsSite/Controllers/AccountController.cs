@@ -4,9 +4,6 @@ using BubbleNewsSite.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -75,8 +72,7 @@ namespace BubbleNewsSite.Controllers
                     await emailService.SendEmailAsync(model.Email, "Confirm your account",
                         $"Confirm registration by clicking on the link: <a href='{confiramtionLink}'>link</a>");
 
-                    return Content("To complete registration, check your email and go to " +
-                        "by the link specified in the letter");
+                    return View("RegisterConfirmation");
                 }
                 else
                 {
@@ -159,6 +155,7 @@ namespace BubbleNewsSite.Controllers
         #region Logout
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
@@ -183,9 +180,6 @@ namespace BubbleNewsSite.Controllers
                 var user = await _userManager.FindByEmailAsync(model.Email);
                 if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
                 {
-                    // пользователь с данным email может отсутствовать в бд
-                    // тем не менее мы выводим стандартное сообщение, чтобы скрыть 
-                    // наличие или отсутствие пользователя в бд
                     return View("ForgotPasswordConfirmation");
                 }
 
@@ -193,7 +187,7 @@ namespace BubbleNewsSite.Controllers
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
                 EmailService emailService = new EmailService();
                 await emailService.SendEmailAsync(model.Email, "Reset Password",
-                $"Для сброса пароля пройдите по ссылке: <a href='{callbackUrl}'>link</a>");
+                $"To reset your password follow the link: <a href='{callbackUrl}'>link</a>");
                 return View("ForgotPasswordConfirmation");
             }
             return View(model);
@@ -235,6 +229,7 @@ namespace BubbleNewsSite.Controllers
 
         #region ChangePassword
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> ChangePasswordCurUser()
         {
             var GetUserId = _userManager.GetUserId(User);
@@ -250,6 +245,7 @@ namespace BubbleNewsSite.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> ChangePasswordCurUser(UserChangePasswordViewModel model)
         {
             if (ModelState.IsValid)
@@ -279,16 +275,92 @@ namespace BubbleNewsSite.Controllers
         }
         #endregion
 
+        #region ChangePersonalData
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> ChangePersonalData()
+        {
+            var GetUserId = _userManager.GetUserId(User);
+
+            User user = await _userManager.FindByIdAsync(GetUserId);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            EditUserViewModel model = new EditUserViewModel
+            {
+                Id = user.Id,
+                Email = user.Email,
+                Name = user.Name,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Gender = user.Gender
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> ChangePersonalData(EditUserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = await _userManager.FindByIdAsync(model.Id);
+
+                if (model.Avatar != null)
+                {
+                    byte[] imageData = null;
+                    // read the transferred file into a byte array
+                    using (var binaryReader = new BinaryReader(model.Avatar.OpenReadStream()))
+                    {
+                        imageData = binaryReader.ReadBytes((int)model.Avatar.Length);
+                    }
+                    // setting a byte array
+                    user.Avatar = imageData;
+                }
+
+                if (user != null)
+                {
+                    user.Email = model.Email;
+                    user.UserName = model.Email;
+                    user.FirstName = model.FirstName;
+                    user.LastName = model.LastName;
+                    user.Gender = user.Gender;
+                    user.Name = user.Name;
+
+                    var result = await _userManager.UpdateAsync(user);
+
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("MyPersonalCabinet");
+                    }
+                    else
+                    {
+                        foreach (var error in result.Errors)
+                        {
+                            ModelState.AddModelError(string.Empty, error.Description);
+                        }
+                    }
+                }
+            }
+
+            return View(model);
+        }
+        #endregion
+
         #region MyPersonalCabinet 
 
         [Authorize]
-        public async Task<IActionResult> MyPersonalCabinet(string id)
+        public async Task<IActionResult> MyPersonalCabinet()
         {
-
-            var user = await _userManager.FindByIdAsync(id);
             var userId = _userManager.GetUserId(HttpContext.User);
 
-            if (user != null && userId == id)
+            var user = await _userManager.FindByIdAsync(userId);
+
+            if (user != null)
             {
                 return View(user);
             }

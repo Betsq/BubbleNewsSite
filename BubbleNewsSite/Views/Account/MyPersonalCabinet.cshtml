@@ -13,23 +13,59 @@
 
     </div>
     <div class="col-md-8 d-flex flex-wrap">
-        <h3 class="col-md-12 d-flex justify-content-center pb-3">
-            Account @Model.Name
-        </h3>
-
-        <div class="col-md-12">
-            <h3>First name: @Model.FirstName</h3>
-        </div>
-        <div class="col-md-12">
-            <h3>Last name : @Model.LastName</h3>
-        </div>
-        <div class="col-md-12">
-            <h3><a class="text-decoration-none text-primary" asp-action="ChangePasswordCurUser" asp-controller="Account">Change password</a></h3>
-        </div>
-        <div class="col-md-12">
-            <h3>Your email: @Model.Email</h3>
+        <div class="col-md-12 text-center mb-4">
+            <h3>
+                My account
+            </h3>
         </div>
 
+        <div class="col-md-12 d-flex justify-content-center flex-wrap border-bottom mb-2">
+            <div class="col-md-12 text-secondary d-flex justify-content-center">
+                NAME
+            </div>
+            <h6 class="col-md-12 d-flex justify-content-center">@Model.Name</h6>
+        </div>
+
+        <div class="col-md-12 d-flex justify-content-center flex-wrap border-bottom mb-2">
+            <div class="col-md-12 text-secondary d-flex justify-content-center">
+                FIRST NAME
+            </div>
+            <h6 class="col-md-12 d-flex justify-content-center">@Model.FirstName</h6>
+        </div>
+
+        <div class="col-md-12 d-flex justify-content-center flex-wrap border-bottom mb-2">
+            <div class="col-md-12 text-secondary d-flex justify-content-center">
+                LAST NAME
+            </div>
+            <h6 class="col-md-12 d-flex justify-content-center">@Model.LastName</h6>
+        </div>
+
+
+        <div class="col-md-12 d-flex justify-content-center flex-wrap border-bottom mb-2">
+            <div class="col-md-12 text-secondary d-flex justify-content-center">
+                EMAIL
+            </div>
+            <h6 class="col-md-12 d-flex justify-content-center">@Model.Email</h6>
+        </div>
+
+        <div class="col-md-12 d-flex justify-content-center flex-wrap border-bottom mb-2">
+            <div class="col-md-12 text-secondary d-flex justify-content-center">
+                GENDER
+            </div>
+            <h6 class="col-md-12 d-flex justify-content-center">@Model.Gender</h6>
+        </div>
+
+        <div class="col-md-12 d-flex justify-content-center flex-wrap border-bottom mb-2">
+            <h5 class="col-md-12 d-flex justify-content-center">
+                <a class="text-decoration-none text-dark" asp-action="ChangePasswordCurUser" asp-controller="Account">Change password</a>
+            </h5>
+        </div>
+
+        <div class="col-md-12 d-flex justify-content-center flex-wrap border-bottom">
+            <h5 class="col-md-12 d-flex justify-content-center">
+                <a class="text-decoration-none text-dark" asp-action="ChangePersonalData" asp-controller="Account">Change personal data</a>
+            </h5>
+        </div>
     </div>
 </div>
 

@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using BubbleNewsSite.Models;
 using BubbleNewsSite.ViewModels;
-using Microsoft.AspNetCore.Authorization;
 using System.IO;
 
 namespace BubbleNewsSite.Controllers

@@ -20,7 +20,6 @@ namespace BubbleNewsSite.ViewModels
         [StringLength(20, MinimumLength = 1, ErrorMessage = "The length must be between 1 and 20 characters")]
         public string LastName { get; set; }
 
-        [Required]
         [Display(Name = "Gender")]
         public string Gender { get; set; }
 

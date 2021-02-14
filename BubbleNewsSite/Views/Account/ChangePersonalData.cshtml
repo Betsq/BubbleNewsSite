@@ -1,0 +1,33 @@
+﻿@model BubbleNewsSite.ViewModels.EditUserViewModel
+@{
+    ViewBag.Title = "Change personal data";
+}
+<form asp-action="ChangePersonalData" asp-controller="Account" enctype="multipart/form-data">
+    <div class="text-danger" asp-validation-summary="All"></div>
+    <div class="form-group">
+        <input type="hidden" asp-for="Id" />
+    </div>
+    <div>
+        <label asp-for="FirstName"></label><br />
+        <input class="form-control" asp-for="FirstName" />
+        <span asp-validation-for="FirstName"></span>
+    </div>
+    <div>
+        <label asp-for="LastName"></label><br />
+        <input class="form-control" asp-for="LastName" />
+        <span asp-validation-for="LastName"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email" class="control-label">Email</label>
+        <input class="form-control" type="text" asp-for="Email" />
+        <span asp-validation-for="Email"></span>
+    </div>
+    <div>
+        <label asp-for="Avatar"></label><br />
+        <input class="form-control" asp-for="Avatar" type="file" multiple accept="image/*" />
+        <span asp-validation-for="Avatar"></span>
+    </div>
+    <div class="form-group">
+        <input class="btn btn-outline-secondary" type="submit" value="Save" />
+    </div>
+</form>
