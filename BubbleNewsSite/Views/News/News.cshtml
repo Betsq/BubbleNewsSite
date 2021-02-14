@@ -10,7 +10,7 @@
         <div class="col-md-12 border-bottom d-flex flex-wrap p-0 m-0">
             <div class="col-md-4 p-0 m-0">
                 <a asp-action="NewsPage" asp-controller="News" asp-route-id="@n.Id" class="col-md-12 ">
-                    <img class="col-md-12 pt-1 pb-1 pl-1 ml-0" src="@n.Img" alt="@n.Article" style="width:320px; height:180px;"/>
+                    <img class="col-md-12 pt-1 pb-1 pl-1 ml-0" src="@n.Img" alt="@n.Article" style="width:320px; height:180px;" />
                 </a>
             </div>
             <div class="col-md-8 d-flex flex-wrap mt-1">
@@ -18,7 +18,8 @@
                     @n.Article
                 </h4>
                 <div class="col-md-12 d-flex justify-content-end text-center align-items-end">
-                @n.NewsType, @n.DateCreateNews.ToShortDateString() @n.DateCreateNews.ToShortTimeString()
+                    @n.NewsType, @n.DateCreateNews.ToShortDateString() @n.DateCreateNews.ToShortTimeString() |
+                    <img src="~/img/eye.png" alt="eye" style="height: 27px; width: 27px;" /><div style="padding-left: 4px;">@n.CountViews</div>
                 </div>
             </div>
         </div>

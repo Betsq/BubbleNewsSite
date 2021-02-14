@@ -17,6 +17,8 @@ namespace BubbleNewsSite.Controllers
             db = newsContext;
             _userManager = userManager;
         }
+
+        [HttpGet]
         public async Task<IActionResult> news(string typeNews)
         {
             var nw = from n in db.News select n;
@@ -129,6 +131,20 @@ namespace BubbleNewsSite.Controllers
                 News news = await db.News.FirstOrDefaultAsync(ne => ne.Id == id);
                 if (news != null)
                 {
+                    if (Request.Cookies.ContainsKey(news.Id.ToString()))
+                    {
+                        string name = Request.Cookies[news.Id.ToString()];
+                    }
+                    else
+                    {
+                        Response.Cookies.Append(news.Id.ToString(), news.Id.ToString());
+                        news.CountViews += 1;
+                    }
+
+                    db.News.Update(news);
+
+                    await db.SaveChangesAsync();
+
                     return View(news);
                 }
             }

@@ -1,41 +1,111 @@
 ﻿@model IEnumerable<BubbleNewsSite.Models.News>
 @{
     ViewData["Title"] = "Home";
-    int IsHaveNewsDay = 0;
-    int IsHaveNewsWeek = 0;
+    int isHaveNewsDay = 0;
+    int isHaveNewsWeek = 0;
+    int checkEndDisplayingPopularNews = 0;
 }
 
 <div class="col-md-12 d-flex flex-wrap">
-
-    <div class="col-md-9 d-flex flex-wrap">
+    <div class="col-md-8">
         @foreach (var n in Model)
         {
-            @if (IsHaveNewsDay == 0 && n.IsNewsDay != false)
+            @if (isHaveNewsDay == 0 && n.IsNewsDay != false)
             {
-                <div class="col-md-12 d-flex justify-content-center">
-                    <a asp-action="NewsPage" asp-controller="News" asp-route-id="@n.Id">
-                        <img class="img-fluid" src="@n.Img" alt="@n.Article"/>
-                    </a>
+                <div class="col-md-12 d-flex flex-wrap justify-content-center border mt-2 mb-2">
+                    <div class="col-md-12 ">
+                        <h4 class="d-flex justify-content-center border-bottom">
+                            The main news of the day
+                        </h4>
+                    </div>
+                    <div class="col-md-12">
+                        <a asp-action="NewsPage" asp-controller="News" asp-route-id="@n.Id">
+                            <img class="img-fluid" src="@n.Img" alt="@n.Article" />
+                        </a>
+                    </div>
+                    <div class="col-md-12 text-center border-top mt-2 pt-1">
+                        <a class="text-decoration-none text-dark" asp-action="NewsPage" asp-controller="News" asp-route-id="@n.Id">
+                            @n.Article
+                        </a>
+                    </div>
                 </div>
-                IsHaveNewsDay++;
-            }
-            @if (IsHaveNewsWeek == 0 && n.IsNewsWeek != false)
-            {
-                <div class="col-md-12 d-flex justify-content-center">
-                    <a asp-action="NewsPage" asp-controller="News" asp-route-id="@n.Id">
-                        <img class="img-fluid" src="@n.Img" alt="@n.Article"/>
-                    </a>
-                </div>
+
+                isHaveNewsDay++;
             }
 
+            @if (isHaveNewsWeek == 0 && n.IsNewsWeek != false)
+            {
+                <div class="col-md-12 d-flex flex-wrap justify-content-center border mt-2 mb-5">
+                    <div class="col-md-12 ">
+                        <h4 class="d-flex justify-content-center border-bottom">
+                            The main news of the week
+                        </h4>
+                    </div>
+                    <div class="col-md-12">
+                        <a asp-action="NewsPage" asp-controller="News" asp-route-id="@n.Id">
+                            <img class="img-fluid" src="@n.Img" alt="@n.Article" />
+                        </a>
+                    </div>
+                    <div class="col-md-12 text-center border-top mt-2 pt-1">
+                        <a class="text-decoration-none text-dark" asp-action="NewsPage" asp-controller="News" asp-route-id="@n.Id">
+                            @n.Article
+                        </a>
+                    </div>
+                </div>
 
+                isHaveNewsWeek++;
+            }
         }
-        <div class="col-md-12">
-            News
-        </div>
+
+        @foreach (var n in Model)
+        {
+            <div class="col-md-12 border-bottom d-flex flex-wrap">
+                <div class="col-md-4 p-0 m-0 d-flex justify-content-center">
+                    <a asp-action="NewsPage" asp-controller="News" asp-route-id="@n.Id">
+                        <img class="col-md-12 pt-1 pb-1 pl-1 ml-0" src="@n.Img" alt="Picture for news" style="max-width:230px; max-height:130px;" />
+                    </a>
+                </div>
+
+                <div class="col-md-8 d-flex mt-1">
+
+                    <h5 class="col-md-12 d-flex justify-content-center" style="font-size: 17px;">
+                        <a class="text-center text-decoration-none text-dark" asp-action="NewsPage" asp-controller="News" asp-route-id="@n.Id">
+                            @n.Article
+                        </a>
+                    </h5>
+                </div>
+            </div>
+        }
     </div>
 
-    <div class="col-md-3">
-        ddd
+    <div class="col-md-4">
+        <div class="col-md-12 text-center mb-3">
+            <h4>
+                Most popular news
+            </h4>
+        </div>
+        @foreach (var n in Model.OrderByDescending(ne => ne.CountViews))
+        {
+            <div class="col-md-12 border-bottom">
+                <a class="text-decoration-none text-dark" asp-action="NewsPage" asp-controller="News" asp-route-id="@n.Id">
+                    <div class="col-md-12 text-center">
+                        @n.Article
+                    </div>
+                </a>
+                <div class="col-md-12 d-flex align-items-center mt-1 text-secondary" style="font-size: 14px;">
+                    <img src="~/img/eye.png" alt="eye" style="height: 27px; width: 27px;" /><div class="pr-3">@n.CountViews</div>
+                    @n.NewsType, @n.DateCreateNews.ToShortDateString() @n.DateCreateNews.ToShortTimeString()
+                </div>
+            </div>
+
+            if (checkEndDisplayingPopularNews >= 10)
+            {
+                break;
+            }
+            else
+            {
+                checkEndDisplayingPopularNews++;
+            }
+        }
     </div>
 </div>

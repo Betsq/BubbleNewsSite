@@ -17,6 +17,7 @@
         @Html.Raw(Model.Description)
     </div>
     <div class="col-md-12  d-flex flex-wrap justify-content-end align-content-end">
-        @Model.NewsType, @Model.DateCreateNews.ToShortDateString() @Model.DateCreateNews.ToShortTimeString() (@Model.WhoCreated)
+        @Model.NewsType, @Model.DateCreateNews.ToShortDateString() @Model.DateCreateNews.ToShortTimeString() |
+        <img src="~/img/eye.png" alt="eye" style="height: 27px; width: 27px;" /><div style="padding-left: 4px;">@Model.CountViews</div> (@Model.WhoCreated)
     </div>
 </div>

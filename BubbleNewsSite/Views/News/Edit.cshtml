@@ -37,6 +37,7 @@
         <input type="submit" value="Send" class="btn btn-primary" />
     </div>
 
-    <input type="datetime" asp-for="DateCreateNews" class="d-none">
-    <input type="text" asp-for="WhoCreated" class="d-none">
+    <input type="hidden" asp-for="DateCreateNews">
+    <input type="hidden" asp-for="WhoCreated">
+    <input type="hidden" asp-for="CountViews"/>
 </form>
