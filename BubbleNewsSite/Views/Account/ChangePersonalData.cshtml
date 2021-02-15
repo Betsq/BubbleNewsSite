@@ -5,21 +5,21 @@
 <form asp-action="ChangePersonalData" asp-controller="Account" enctype="multipart/form-data">
     <div class="text-danger" asp-validation-summary="All"></div>
     <div class="form-group">
-        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="Id" readonly/>
     </div>
     <div>
-        <label asp-for="FirstName"></label><br />
-        <input class="form-control" asp-for="FirstName" />
+        <label asp-for="FirstName"></label>
+        <input class="form-control" asp-for="FirstName" placeholder="First name" />
         <span asp-validation-for="FirstName"></span>
     </div>
     <div>
-        <label asp-for="LastName"></label><br />
-        <input class="form-control" asp-for="LastName" />
+        <label asp-for="LastName"></label>
+        <input class="form-control" asp-for="LastName" placeholder="Last name" />
         <span asp-validation-for="LastName"></span>
     </div>
-    <div class="form-group">
-        <label asp-for="Email" class="control-label">Email</label>
-        <input class="form-control" type="text" asp-for="Email" />
+    <div>
+        <label asp-for="Email"></label>
+        <input class="form-control" asp-for="Email" placeholder="Last name" readonly />
         <span asp-validation-for="Email"></span>
     </div>
     <div>

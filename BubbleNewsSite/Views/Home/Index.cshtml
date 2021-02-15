@@ -83,7 +83,7 @@
                 Most popular news
             </h4>
         </div>
-        @foreach (var n in Model.OrderByDescending(ne => ne.CountViews))
+        @foreach (var n in Model.OrderByDescending(ne => ne.CountViews).Where(ne => ne.DateCreateNews > DateTime.Now.AddDays(-7)))
         {
             <div class="col-md-12 border-bottom">
                 <a class="text-decoration-none text-dark" asp-action="NewsPage" asp-controller="News" asp-route-id="@n.Id">

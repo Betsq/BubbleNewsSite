@@ -69,13 +69,13 @@
             {
                 @if (ViewBag.GetUserAvatar != null)
                 {
-                    <a asp-controller="Account" asp-action="MyPersonalCabinet">
+                    <a asp-controller="Account" asp-action="MyAccount">
                         <img class="mr-1 ml-1" style="border-radius: 50%; width: 50px; height: 50px;" src="data:image/jpeg;base64,@(Convert.ToBase64String(ViewBag.GetUserAvatar))" />
                     </a>
                 }
                 else
                 {
-                    <a asp-controller="Account" asp-action="MyPersonalCabinet">
+                    <a asp-controller="Account" asp-action="MyAccount">
                         <img class="mr-1 ml-1" style="border-radius: 50%; width: 50px; height: 50px;" src="~/Avatar/UnknownAvatar.jpg" />
                     </a>
                 }

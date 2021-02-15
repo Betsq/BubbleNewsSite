@@ -7,20 +7,19 @@
 <form asp-action="Create" asp-controller="News">
     <div class="form-group">
         <label asp-for="Article"></label>
-        <input type="text" asp-for="Article" class="form-control">
+        <input class="form-control" type="text" asp-for="Article" placeholder="Article">
     </div>
     <div class="form-group">
         <label asp-for="Description"></label>
-        <textarea asp-for="Description" id="mytextarea"></textarea>
-
+        <textarea asp-for="Description" id="mytextarea" placeholder="Desription"></textarea>
     </div>
     <div class="form-group">
         <label asp-for="NewsType"></label>
-        <select asp-for="NewsType" asp-items="BubbleNewsSite.Util.SelectListItemHelper.GetNewsType()" class="form-control"></select>
+        <select class="form-control" asp-for="NewsType" asp-items="BubbleNewsSite.Util.SelectListItemHelper.GetNewsType()"></select>
     </div>
     <div class="form-group">
         <label asp-for="Img"></label>
-        <input class="form-control" type="text" asp-for="Img" >
+        <input class="form-control" type="text" asp-for="Img" placeholder="Image">
     </div>
     <div class="form-group">
         <label asp-for="HideNews"></label>
@@ -35,6 +34,6 @@
         <input class="form-control" type="checkbox" asp-for="IsNewsWeek">
     </div>
     <div class="form-group">
-        <input type="submit" value="Send" class="btn btn-primary" />
+        <input class="btn btn-primary" type="submit" value="Send"/>
     </div>
 </form>

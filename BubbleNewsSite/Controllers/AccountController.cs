@@ -70,7 +70,7 @@ namespace BubbleNewsSite.Controllers
 
                     EmailService emailService = new EmailService();
                     await emailService.SendEmailAsync(model.Email, "Confirm your account",
-                        $"Confirm registration by clicking on the link: <a href='{confiramtionLink}'>link</a>");
+                        $"Confirm registration by clicking on the link: <a href='{confiramtionLink}'>Confirm</a>");
 
                     return View("RegisterConfirmation");
                 }
@@ -125,7 +125,7 @@ namespace BubbleNewsSite.Controllers
                     // check if email is confirmed
                     if (!await _userManager.IsEmailConfirmedAsync(user))
                     {
-                        ModelState.AddModelError(string.Empty, "Вы не подтвердили свой email");
+                        ModelState.AddModelError(string.Empty, "You have not confirmed your email");
                         return View(model);
                     }
                 }
@@ -187,7 +187,7 @@ namespace BubbleNewsSite.Controllers
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
                 EmailService emailService = new EmailService();
                 await emailService.SendEmailAsync(model.Email, "Reset Password",
-                $"To reset your password follow the link: <a href='{callbackUrl}'>link</a>");
+                $"To reset your password follow the link: <a href='{callbackUrl}'>Follow</a>");
                 return View("ForgotPasswordConfirmation");
             }
             return View(model);
@@ -324,10 +324,10 @@ namespace BubbleNewsSite.Controllers
 
                 if (user != null)
                 {
-                    user.Email = model.Email;
-                    user.UserName = model.Email;
                     user.FirstName = model.FirstName;
                     user.LastName = model.LastName;
+                    user.Email = user.Email;
+                    user.UserName = user.Email;
                     user.Gender = user.Gender;
                     user.Name = user.Name;
 
@@ -351,10 +351,10 @@ namespace BubbleNewsSite.Controllers
         }
         #endregion
 
-        #region MyPersonalCabinet 
+        #region MyAccount 
 
         [Authorize]
-        public async Task<IActionResult> MyPersonalCabinet()
+        public async Task<IActionResult> MyAccount()
         {
             var userId = _userManager.GetUserId(HttpContext.User);
 
@@ -378,6 +378,7 @@ namespace BubbleNewsSite.Controllers
             return Json(true);
         }
 
+        [AcceptVerbs("Get", "Post")]
         public IActionResult CheckEmail(string email)
         {
             var getName = from n in db.Users.Where(nm => nm.Email.Contains(email)) select n;

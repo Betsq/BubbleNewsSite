@@ -1,13 +1,13 @@
 ﻿@model BubbleNewsSite.Models.News
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit news";
 }
 
 <form asp-action="Edit" asp-controller="News">
     <div class="form-group">
-        <label asp-for="Article" class="control-label"></label>
-        <input type="text" asp-for="Article" class="form-control">
+        <label class="control-label" asp-for="Article"></label>
+        <input class="form-control" type="text" asp-for="Article">
     </div>
     <div class="form-group">
         <label asp-for="Description"></label>
@@ -15,29 +15,29 @@
     </div>
     <div class="form-group">
         <label asp-for="NewsType"></label>
-        <select asp-for="NewsType" asp-items="BubbleNewsSite.Util.SelectListItemHelper.GetNewsType()" class="form-control"></select>
+        <select class="form-control" asp-for="NewsType" asp-items="BubbleNewsSite.Util.SelectListItemHelper.GetNewsType()"></select>
     </div>
     <div class="form-group">
         <label asp-for="Img"></label>
-        <input type="text" asp-for="Img" class="form-control">
+        <input class="form-control" type="text" asp-for="Img">
     </div>
     <div class="form-group">
         <label asp-for="HideNews"></label>
-        <input type="checkbox" asp-for="HideNews" class="form-control">
+        <input class="form-control" type="checkbox" asp-for="HideNews">
     </div>
     <div class="form-group">
         <label asp-for="IsNewsDay"></label>
-        <input type="checkbox" asp-for="IsNewsDay" class="form-control">
+        <input class="form-control" type="checkbox" asp-for="IsNewsDay">
     </div>
     <div class="form-group">
         <label asp-for="IsNewsWeek"></label>
-        <input type="checkbox" asp-for="IsNewsWeek" class="form-control">
+        <input class="form-control" type="checkbox" asp-for="IsNewsWeek">
     </div>
     <div class="form-group">
-        <input type="submit" value="Send" class="btn btn-primary" />
+        <input class="btn btn-primary"  type="submit" value="Send"/>
     </div>
 
-    <input type="hidden" asp-for="DateCreateNews">
-    <input type="hidden" asp-for="WhoCreated">
-    <input type="hidden" asp-for="CountViews"/>
+    <input type="hidden" asp-for="DateCreateNews" readonly>
+    <input type="hidden" asp-for="WhoCreated" readonly>
+    <input type="hidden" asp-for="CountViews" readonly/>
 </form>

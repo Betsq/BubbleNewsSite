@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
-
+@{
+    ViewBag.Title = "List roles";
+}
 <h2>List of roles</h2>
 <table class="table">
     @foreach (var role in Model)

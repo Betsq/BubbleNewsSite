@@ -5,10 +5,11 @@ using Microsoft.AspNetCore.Identity;
 using BubbleNewsSite.Models;
 using BubbleNewsSite.ViewModels;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BubbleNewsSite.Controllers
 {
-    //[Authorize(Roles = "admin")]
+    [Authorize(Roles = "admin")]
     public class UsersController : Controller
     {
         private readonly UserManager<User> _userManager;
@@ -131,7 +132,7 @@ namespace BubbleNewsSite.Controllers
             User user = await _userManager.FindByIdAsync(id);
             if (user != null)
             {
-                IdentityResult result = await _userManager.DeleteAsync(user);
+                await _userManager.DeleteAsync(user);
             }
             return RedirectToAction("Index");
         }
@@ -142,11 +143,14 @@ namespace BubbleNewsSite.Controllers
         public async Task<IActionResult> ChangePassword(string id)
         {
             User user = await _userManager.FindByIdAsync(id);
+
             if (user == null)
             {
                 return NotFound();
             }
+
             ChangePasswordViewModel model = new ChangePasswordViewModel { Id = user.Id, Email = user.Email};
+
             return View(model);
         }
 
