@@ -1,8 +1,10 @@
 ﻿using BubbleNewsSite.Models;
+using BubbleNewsSite.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,17 +21,44 @@ namespace BubbleNewsSite.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> news(string typeNews)
+        public async Task<IActionResult> news(string typeNews, int page = 1)
         {
-            var nw = from n in db.News select n;
+
+            int pageSize = 3;
+
+            var news = from n in db.News select n;
+
+            var count = await news.CountAsync();
+
+            //Currently does not work together with the choice of the type of news
             if (typeNews != null)
             {
-                nw = nw.Where(ne => ne.NewsType.Contains(typeNews) && ne.HideNews != true);
-                
-                return View(await nw.OrderByDescending(ne => ne.DateCreateNews).ToListAsync());
+                news = news.Where(ne => ne.NewsType.Contains(typeNews) && ne.HideNews != true);
+                var items = await news.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+
+                PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
+
+                IndexViewModel viewModel = new IndexViewModel
+                {
+                    PageViewModel = pageViewModel,
+                    News = items
+                };
+                return View(viewModel);
             }
-            return View(await db.News.Where(ne => ne.HideNews != true).OrderByDescending(ne => ne.DateCreateNews).ToListAsync());
+            else
+            {
+                var items = await news.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+                PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
+
+                IndexViewModel viewModel = new IndexViewModel
+                {
+                    PageViewModel = pageViewModel,
+                    News = items
+                };
+                return View(viewModel);
+            }
         }
+
 
         public async Task<IActionResult> NewsCRUD()
         {

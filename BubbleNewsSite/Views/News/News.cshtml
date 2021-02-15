@@ -1,11 +1,12 @@
-﻿@model IEnumerable<BubbleNewsSite.Models.News>
+﻿@using BubbleNewsSite.Models
+@model IndexViewModel
 
 @{
     ViewBag.Title = "News";
 }
 
 <div class="col-md-12">
-    @foreach (var n in Model)
+    @foreach (var n in Model.News)
     {
         <div class="col-md-12 border-bottom d-flex flex-wrap p-0 m-0">
             <div class="col-md-4 p-0 m-0">
@@ -23,5 +24,23 @@
                 </div>
             </div>
         </div>
+    }
+    @if (Model.PageViewModel.HasPreviousPage)
+    {
+        <a asp-action="news"
+           asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+           class="btn btn-outline-dark">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            Back
+        </a>
+    }
+    @if (Model.PageViewModel.HasNextPage)
+    {
+        <a asp-action="news"
+           asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+           class="btn btn-outline-dark">
+            Next
+            <i class="glyphicon glyphicon-chevron-right"></i>
+        </a>
     }
 </div>

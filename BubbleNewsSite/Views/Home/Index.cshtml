@@ -57,7 +57,7 @@
             }
         }
 
-        @foreach (var n in Model)
+        @foreach (var n in Model.Where(ne => ne.DateCreateNews > DateTime.Now.AddDays(-7)))
         {
             <div class="col-md-12 border-bottom d-flex flex-wrap">
                 <div class="col-md-4 p-0 m-0 d-flex justify-content-center">
