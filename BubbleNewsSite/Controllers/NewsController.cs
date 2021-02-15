@@ -21,42 +21,26 @@ namespace BubbleNewsSite.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> news(string typeNews, int page = 1)
+        public async Task<IActionResult> news(int page = 1)
         {
 
             int pageSize = 3;
 
-            var news = from n in db.News select n;
+            var news = from n in db.News.Where(ne => ne.HideNews != true).OrderByDescending(ne => ne.DateCreateNews) select n;
 
-            var count = await news.CountAsync();
+            var count = news.Count();
 
-            //Currently does not work together with the choice of the type of news
-            if (typeNews != null)
+            var items = await news.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+
+            PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
+
+            IndexViewModel viewModel = new IndexViewModel
             {
-                news = news.Where(ne => ne.NewsType.Contains(typeNews) && ne.HideNews != true);
-                var items = await news.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+                PageViewModel = pageViewModel,
+                News = items
+            };
 
-                PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
-
-                IndexViewModel viewModel = new IndexViewModel
-                {
-                    PageViewModel = pageViewModel,
-                    News = items
-                };
-                return View(viewModel);
-            }
-            else
-            {
-                var items = await news.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
-                PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
-
-                IndexViewModel viewModel = new IndexViewModel
-                {
-                    PageViewModel = pageViewModel,
-                    News = items
-                };
-                return View(viewModel);
-            }
+            return View(viewModel);
         }
 
 
@@ -80,9 +64,17 @@ namespace BubbleNewsSite.Controllers
 
             var getCurTime = DateTime.Now;
 
-            var nw = new News { NewsType = news.NewsType, Article = news.Article, Description = news.Description,
-                HideNews = news.HideNews, Img = news.Img, DateCreateNews = getCurTime, WhoCreated = whoCreated,
-                IsNewsDay = news.IsNewsDay, IsNewsWeek = news.IsNewsWeek
+            var nw = new News
+            {
+                NewsType = news.NewsType,
+                Article = news.Article,
+                Description = news.Description,
+                HideNews = news.HideNews,
+                Img = news.Img,
+                DateCreateNews = getCurTime,
+                WhoCreated = whoCreated,
+                IsNewsDay = news.IsNewsDay,
+                IsNewsWeek = news.IsNewsWeek
             };
 
             db.News.Add(nw);
@@ -99,7 +91,7 @@ namespace BubbleNewsSite.Controllers
             {
                 News news = await db.News.FirstOrDefaultAsync(n => n.Id == id);
                 if (news != null)
-                    return View(news); 
+                    return View(news);
             }
             return NotFound();
         }
