@@ -8,6 +8,9 @@ namespace BubbleNewsSite.ViewModels
     {
         public string Id { get; set; }
         public string Email { get; set; }
+        [Required]
+        [Display(Name = "Name")]
+        [Remote(action: "CheckName", controller: "Account", ErrorMessage = "Username is busy")]
         public string Name { get; set; }
 
         [Required]

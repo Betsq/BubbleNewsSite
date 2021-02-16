@@ -491,7 +491,15 @@ namespace BubbleNewsSite.Controllers
                     user.Email = user.Email;
                     user.UserName = user.Email;
                     user.Gender = user.Gender;
-                    user.Name = user.Name;
+
+                    if (user.Name != null)
+                    {
+                        user.Name = user.Name;
+                    }
+                    else
+                    {
+                        user.Name = model.Name;
+                    }
 
                     var result = await _userManager.UpdateAsync(user);
 

@@ -5,8 +5,23 @@
 <form asp-action="ChangePersonalData" asp-controller="Account" enctype="multipart/form-data">
     <div class="text-danger" asp-validation-summary="All"></div>
     <div class="form-group">
-        <input type="hidden" asp-for="Id" readonly/>
+        <input type="hidden" asp-for="Id" readonly />
     </div>
+    @if (Model.Name == null)
+    {
+        <div>
+            <label asp-for="Name"></label>
+            <input class="form-control" asp-for="Name" placeholder="Name" />
+            <span asp-validation-for="Name"></span>
+        </div>
+    }
+    else
+    {
+        <div>
+            <label asp-for="Name"></label>
+            <input class="form-control" asp-for="Name" placeholder="Name" readonly/>
+        </div>
+    }
     <div>
         <label asp-for="FirstName"></label>
         <input class="form-control" asp-for="FirstName" placeholder="First name" />
@@ -19,8 +34,7 @@
     </div>
     <div>
         <label asp-for="Email"></label>
-        <input class="form-control" asp-for="Email" placeholder="Last name" readonly />
-        <span asp-validation-for="Email"></span>
+        <input class="form-control" asp-for="Email" placeholder="Email" readonly />
     </div>
     <div>
         <label asp-for="Avatar"></label><br />
