@@ -29,21 +29,19 @@
                 <input class="btn btn-dark d-flex justify-content-end" type="submit" value="Sign in" />
             </div>
         </form>
-        <div class="col-md-12 d-flex">
+        <div class="col-md-12 d-flex flex-wrap">
             <a class="col-md-4 d-flex justify-content-start text-decoration-none text-secondary" asp-action="Register" asp-controller="Account">Register</a>
             <a class="col-md-8 d-flex justify-content-end text-decoration-none text-secondary" asp-action="ForgotPassword" asp-controller="Account">Forgot password?</a>
+            <form class="col-md-12 mt-3 d-flex justify-content-end" method="post" asp-action="ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl">
+                <div>
+                    @foreach (var provider in Model.ExternalLogins)
+                    {
+                        <button type="submit" name="provider" value="@provider.Name" style="border:1px solid white; background-color: transparent;">
+                            <img src="~/img/google-icons.png" style="height:50px; width: 50px;" />
+                        </button>
+                    }
+                </div>
+            </form>
         </div>
     </div>
-    <form method="post" asp-action="ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl">
-        <div>
-            @foreach (var provider in Model.ExternalLogins)
-            {
-                <button type="submit" class="btn btn-primary"
-                        name="provider" value="@provider.Name"
-                        title="Log in using your @provider.DisplayName account">
-                    @provider.DisplayName
-                </button>
-            }
-        </div>
-    </form>
 </div>
