@@ -14,11 +14,11 @@
         <form class="col-md-12" method="post" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl">
             <div class="col-md-12" asp-validation-summary="ModelOnly"></div>
             <div class="col-md-12 pt-3 pb-3">
-                <input class="form-control" asp-for="Email" placeholder="Enter email"/>
+                <input class="form-control" asp-for="Email" placeholder="Enter email" />
                 <span asp-validation-for="Email"></span>
             </div>
             <div class="col-md-12 pb-3">
-                <input class="form-control" asp-for="Password" placeholder="Password"/>
+                <input class="form-control" asp-for="Password" placeholder="Password" />
                 <span asp-validation-for="Password"></span>
             </div>
             <div class="col-md-12 form-check d-flex pb-3 ml-3">
@@ -33,6 +33,17 @@
             <a class="col-md-4 d-flex justify-content-start text-decoration-none text-secondary" asp-action="Register" asp-controller="Account">Register</a>
             <a class="col-md-8 d-flex justify-content-end text-decoration-none text-secondary" asp-action="ForgotPassword" asp-controller="Account">Forgot password?</a>
         </div>
-        
     </div>
+    <form method="post" asp-action="ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl">
+        <div>
+            @foreach (var provider in Model.ExternalLogins)
+            {
+                <button type="submit" class="btn btn-primary"
+                        name="provider" value="@provider.Name"
+                        title="Log in using your @provider.DisplayName account">
+                    @provider.DisplayName
+                </button>
+            }
+        </div>
+    </form>
 </div>

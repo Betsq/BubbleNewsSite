@@ -31,9 +31,15 @@ namespace BubbleNewsSite
                 opts.Password.RequireLowercase = false;
                 opts.Password.RequireUppercase = false;
                 opts.Password.RequireDigit = false;
-            })
-                .AddEntityFrameworkStores<NewsContext>()
-                .AddDefaultTokenProviders() ;
+            }).AddEntityFrameworkStores<NewsContext>()
+             .AddDefaultTokenProviders();
+
+            services.AddAuthentication().AddGoogle(option =>
+            {
+                option.ClientId = "306240485174-sh8u3ijq68f9s7or9fc8s0aguicjafd0.apps.googleusercontent.com";
+                option.ClientSecret = "aIwcN0JH3Wr2NWHy9Hufb0RX";
+                
+            });
 
             services.AddControllersWithViews();
         }
