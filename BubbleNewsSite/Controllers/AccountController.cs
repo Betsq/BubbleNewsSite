@@ -324,7 +324,7 @@ namespace BubbleNewsSite.Controllers
         }
         #endregion
 
-        #region ChangePassword
+        #region ChangePasswordCurUser
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> ChangePasswordCurUser()
@@ -334,6 +334,10 @@ namespace BubbleNewsSite.Controllers
             User user = await _userManager.FindByIdAsync(GetUserId);
 
             if (user == null)
+            {
+                return NotFound();
+            }
+            if (user.PasswordHash == null)
             {
                 return NotFound();
             }
@@ -370,6 +374,67 @@ namespace BubbleNewsSite.Controllers
             }
             return View(model);
         }
+        #endregion
+
+        #region ChangePassword(google_authentication)
+        //Change your password if you don't have one
+        [HttpGet]
+        public async Task<IActionResult> ChangePas()
+        {
+            var GetUserId = _userManager.GetUserId(User);
+
+            User user = await _userManager.FindByIdAsync(GetUserId);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+            if (user.PasswordHash != null)
+            {
+                return NotFound();
+            }
+            ChangePasswordViewModel model = new ChangePasswordViewModel { Id = user.Id, Email = user.Email };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePas(ChangePasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = await _userManager.FindByIdAsync(model.Id);
+
+                if (user != null)
+                {
+                    var _passwordValidator = HttpContext.RequestServices.
+                        GetService(typeof(IPasswordValidator<User>)) as IPasswordValidator<User>;
+                    var _passwordHasher = HttpContext.RequestServices.
+                        GetService(typeof(IPasswordHasher<User>)) as IPasswordHasher<User>;
+
+                    IdentityResult result = await _passwordValidator.ValidateAsync(_userManager, user, model.NewPassword);
+                    if (result.Succeeded)
+                    {
+                        user.PasswordHash = _passwordHasher.HashPassword(user, model.NewPassword);
+                        await _userManager.UpdateAsync(user);
+                        return RedirectToAction("MyAccount");
+                    }
+                    else
+                    {
+                        foreach (var error in result.Errors)
+                        {
+                            ModelState.AddModelError(string.Empty, error.Description);
+                        }
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "User not found");
+                }
+            }
+            return View(model);
+        }
+
         #endregion
 
         #region ChangePersonalData

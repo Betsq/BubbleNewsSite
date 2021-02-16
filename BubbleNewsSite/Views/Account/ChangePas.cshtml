@@ -1,0 +1,35 @@
+﻿@model BubbleNewsSite.ViewModels.ChangePasswordViewModel
+@{
+    ViewBag.Title = "Change Password";
+    Layout = "~/Views/Shared/_LayoutLogReg.cshtml";
+}
+<div class="col-md-12 d-flex justify-content-center pt-5 pb-5">
+    <a asp-action="Index" asp-controller="Home">
+        <img src="~/logo/Bubblelogo.png" alt="Logo Bubbles News" />
+    </a>
+</div>
+
+<div class="col-md-12 d-flex flex-wrap justify-content-center align-content-center">
+    <div class="col-md-6 d-flex flex-wrap justify-content-center">
+
+        <h2 class="col-md-12 d-flex justify-content-center align-content-center">
+            Add password
+        </h2>
+
+        <form asp-action="ChangePas" asp-controller="Account">
+
+            <div class="text-danger" asp-validation-summary="All"></div>
+            <input type="hidden" asp-for="Id" readonly />
+            <input type="hidden" asp-for="Email" readonly />
+
+            <div class="col-md-12 pb-3">
+                <input class="form-control" type="text" asp-for="NewPassword" placeholder="New password" />
+            </div>
+
+            <div class="col-md-12 pb-3 d-flex justify-content-end">
+                <input class="btn btn-dark" type="submit" value="Add password" />
+            </div>
+
+        </form>
+    </div>
+</div>

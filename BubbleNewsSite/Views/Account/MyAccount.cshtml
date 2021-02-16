@@ -56,13 +56,22 @@
             </div>
             <h6 class="col-md-12 d-flex justify-content-center">@Model.Gender</h6>
         </div>
-
-        <div class="col-md-12 d-flex justify-content-center flex-wrap border-bottom mb-2">
-            <h5 class="col-md-12 d-flex justify-content-center">
-                <a class="text-decoration-none text-dark" asp-action="ChangePasswordCurUser" asp-controller="Account">Change password</a>
-            </h5>
-        </div>
-
+        @if (Model.PasswordHash == null)
+        {
+            <div class="col-md-12 d-flex justify-content-center flex-wrap border-bottom mb-2">
+                <h5 class="col-md-12 d-flex justify-content-center">
+                    <a class="text-decoration-none text-dark" asp-action="ChangePas" asp-controller="Account">Change password</a>
+                </h5>
+            </div>
+        }
+        else
+        {
+            <div class="col-md-12 d-flex justify-content-center flex-wrap border-bottom mb-2">
+                <h5 class="col-md-12 d-flex justify-content-center">
+                    <a class="text-decoration-none text-dark" asp-action="ChangePasswordCurUser" asp-controller="Account">Change password</a>
+                </h5>
+            </div>
+        }
         <div class="col-md-12 d-flex justify-content-center flex-wrap border-bottom">
             <h5 class="col-md-12 d-flex justify-content-center">
                 <a class="text-decoration-none text-dark" asp-action="ChangePersonalData" asp-controller="Account">Change personal data</a>
