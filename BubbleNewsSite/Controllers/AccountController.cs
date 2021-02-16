@@ -432,7 +432,7 @@ namespace BubbleNewsSite.Controllers
 
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("MyPersonalCabinet");
+                        return RedirectToAction("MyAccount");
                     }
                     else
                     {
