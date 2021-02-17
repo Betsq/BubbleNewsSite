@@ -488,10 +488,9 @@ namespace BubbleNewsSite.Controllers
                 {
                     user.FirstName = model.FirstName;
                     user.LastName = model.LastName;
+                    user.Gender = model.Gender;
                     user.Email = user.Email;
                     user.UserName = user.Email;
-                    user.Gender = user.Gender;
-
                     if (user.Name != null)
                     {
                         user.Name = user.Name;
